@@ -102,6 +102,7 @@ final class LinksTest extends TestCase
         $title  = 'test-title';
         $class  = 'test-class';
         $target = null;
+        $label  = 'test-label';
 
         $page = $this->getMockBuilder(AbstractPage::class)
             ->disableOriginalConstructor()
@@ -121,8 +122,11 @@ final class LinksTest extends TestCase
         $page->expects(self::once())
             ->method('getTarget')
             ->willReturn($target);
+        $page->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
 
-        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target]];
+        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target, 'label' => $label]];
         $links         = new Links();
 
         $links->setLinks([$page]);
@@ -142,6 +146,7 @@ final class LinksTest extends TestCase
         $title  = 'test-title';
         $class  = 'test-class';
         $target = null;
+        $label  = 'test-label';
 
         $page = $this->getMockBuilder(PageInterface::class)
             ->disableOriginalConstructor()
@@ -161,8 +166,11 @@ final class LinksTest extends TestCase
         $page->expects(self::once())
             ->method('getTarget')
             ->willReturn($target);
+        $page->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
 
-        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target]];
+        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target, 'label' => $label]];
         $links         = new Links();
 
         $links->setLinks([$page]);

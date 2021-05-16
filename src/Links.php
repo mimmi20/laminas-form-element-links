@@ -109,6 +109,7 @@ final class Links extends Element implements InputProviderInterface
                     'class' => $link->getClass(),
                     'href' => $link->getHref(),
                     'target' => $link->getTarget(),
+                    'label' => $link->getLabel(),
                 ];
                 continue;
             }
@@ -120,6 +121,7 @@ final class Links extends Element implements InputProviderInterface
                     'class' => $link->getClass(),
                     'href' => $link->getHref(),
                     'target' => $link->getTarget(),
+                    'label' => $link->getLabel(),
                 ];
                 continue;
             }
