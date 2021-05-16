@@ -16,5 +16,5 @@ parameters:
   checkMissingIterableValueType: false
   excludes_analyse:
     - */tests/*/data/*
-#  ignoreErrors:
-#    - '~MockObject~'
+  ignoreErrors:
+    - '~PHPDoc tag @throws with type .* is not compatible with parent~'

@@ -29,7 +29,7 @@ use function is_string;
 
 final class Links extends Element implements InputProviderInterface
 {
-    private ValidatorInterface $validator;
+    private ?ValidatorInterface $validator;
 
     /** @var array<int, array<string, string|null>> */
     private array $links = [];
@@ -79,11 +79,11 @@ final class Links extends Element implements InputProviderInterface
     }
 
     /**
-     * @param array<int, AbstractPage|array|PageInterface|string> $links
+     * @param array<int, AbstractPage|array|PageInterface|string>|iterable $links
      *
      * @throws InvalidArgumentException
      */
-    public function setLinks(array $links): self
+    public function setLinks(iterable $links): self
     {
         $this->links = [];
 
@@ -173,7 +173,7 @@ final class Links extends Element implements InputProviderInterface
      *
      * Attaches an email validator.
      *
-     * @return array<string, (bool|string|array<(int|string), (string|ValidatorInterface)>|null)>
+     * @return array<string, array<int, array<string, class-string>|ValidatorInterface>|int|string|false>
      */
     public function getInputSpecification(): array
     {

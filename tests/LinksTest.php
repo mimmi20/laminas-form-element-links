@@ -13,6 +13,7 @@ declare(strict_types = 1);
 namespace Mimmi20Test\Form\Element\Links;
 
 use Laminas\Form\Exception\InvalidArgumentException;
+use Laminas\Navigation\Exception\BadMethodCallException;
 use Laminas\Navigation\Page\AbstractPage;
 use Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\Form\Element\Links\Links;
@@ -29,6 +30,7 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetAndGetSeperator(): void
     {
@@ -43,6 +45,7 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetStringHref(): void
     {
@@ -56,8 +59,7 @@ final class LinksTest extends TestCase
     }
 
     /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetArrayWithoutHref(): void
     {
@@ -72,6 +74,7 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetArrayHref(): void
     {
@@ -88,6 +91,8 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws BadMethodCallException
      */
     public function testSetAbstractPage(): void
     {
@@ -127,6 +132,7 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetPageInterface(): void
     {
@@ -164,8 +170,7 @@ final class LinksTest extends TestCase
     }
 
     /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testSetWrongDatatype(): void
     {
@@ -180,6 +185,7 @@ final class LinksTest extends TestCase
     /**
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function testCanRetrieveDefaultSeparator(): void
     {
