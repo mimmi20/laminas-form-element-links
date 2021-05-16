@@ -170,14 +170,4 @@ final class Links extends Element implements InputProviderInterface
     {
         return $this;
     }
-
-    /**
-     * Retrieve the element value
-     *
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
 }

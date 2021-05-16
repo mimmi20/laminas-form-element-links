@@ -235,4 +235,19 @@ final class LinksTest extends TestCase
             $form->getMessages()
         );
     }
+
+    /**
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testSetAndGetValue(): void
+    {
+        $expectedSeperator = ' || ';
+        $links             = new Links();
+
+        $links->setValue($expectedSeperator);
+
+        self::assertNotSame($expectedSeperator, $links->getValue());
+    }
 }
