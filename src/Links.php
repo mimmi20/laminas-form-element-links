@@ -12,12 +12,10 @@ declare(strict_types = 1);
 
 namespace Mimmi20\Form\Element\Links;
 
-use Laminas\Filter\StringTrim;
 use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Navigation\Page\AbstractPage;
-use Laminas\Validator\Uri;
 use Laminas\Validator\ValidatorInterface;
 use Mezzio\Navigation\Page\PageInterface;
 use Traversable;
@@ -147,31 +145,7 @@ final class Links extends Element implements InputProviderInterface
     }
 
     /**
-     * Get primary validator
-     */
-    public function getValidator(): ValidatorInterface
-    {
-        if (null === $this->validator) {
-            $this->validator = new Uri();
-        }
-
-        return $this->validator;
-    }
-
-    /**
-     * Sets the primary validator to use for this element
-     */
-    public function setValidator(ValidatorInterface $validator): self
-    {
-        $this->validator = $validator;
-
-        return $this;
-    }
-
-    /**
      * Provide default input rules for this element
-     *
-     * Attaches an email validator.
      *
      * @return array<string, array<int, array<string, class-string>|ValidatorInterface>|int|string|false>
      */
@@ -180,24 +154,18 @@ final class Links extends Element implements InputProviderInterface
         return [
             'name' => $this->getName(),
             'required' => false,
-            'filters' => [
-                ['name' => StringTrim::class],
-            ],
-            'validators' => [
-                $this->getValidator(),
-            ],
         ];
     }
 
     /**
-     * Set the element value
+     * Set the element value, As this Element has no value to send with the form, no value is set
      *
      * @param mixed $value
+     *
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function setValue($value): self
     {
-        $this->value = $value;
-
         return $this;
     }
 

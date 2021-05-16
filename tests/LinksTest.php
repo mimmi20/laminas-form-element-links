@@ -12,11 +12,10 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\Form\Element\Links;
 
+use Laminas\Form\Exception\DomainException;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Exception\BadMethodCallException;
 use Laminas\Navigation\Page\AbstractPage;
-use Laminas\Validator\NotEmpty;
-use Laminas\Validator\Uri;
 use Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\Form\Element\Links\Links;
 use Mimmi20Test\Form\Element\Links\TestAsset\TestFormStringUrl;
@@ -191,8 +190,9 @@ final class LinksTest extends TestCase
      */
     public function testCanRetrieveDefaultSeparator(): void
     {
+        $href              = 'http://www.test.com';
         $expectedSeperator = ' || ';
-        $expectedLinks     = [['href' => 'http://www.test.com']];
+        $expectedLinks     = [['href' => $href]];
         $form              = new TestFormStringUrl();
         $links             = $form->get('links');
 
@@ -213,105 +213,18 @@ final class LinksTest extends TestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws DomainException
      */
-    public function testSetValidator(): void
+    public function testValidationIsEveryTimeTrue(): void
     {
-        $validator = new NotEmpty();
-        $links     = new Links();
+        $form = new TestFormStringUrl();
 
-        self::assertInstanceOf(Uri::class, $links->getValidator());
+        $form->setData([]);
 
-        $links->setValidator($validator);
-        self::assertSame($validator, $links->getValidator());
+        self::assertTrue($form->isValid());
+        self::assertSame(
+            [],
+            $form->getMessages()
+        );
     }
-
-    /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
-    public function testSetValue(): void
-    {
-        $value = 'test-value';
-        $links = new Links();
-
-        $links->setValue($value);
-        self::assertSame($value, $links->getValue());
-    }
-
-//    /**
-//     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-//     * @throws Exception
-//     * @throws InvalidArgumentException
-//     * @throws DomainException
-//     */
-//    public function testCannotAllowNewElementsIfAllowAddIsFalse(): void
-//    {
-//        self::markTestSkipped();
-//        $collection = $this->form->get('colors');
-//
-//        assert(
-//            $collection instanceof ElementGroup,
-//            sprintf(
-//                '$collection should be an Instance of %s, but was %s',
-//                ElementGroup::class,
-//                get_class($collection)
-//            )
-//        );
-//
-//        self::assertTrue($collection->allowAdd());
-//        $collection->setAllowAdd(false);
-//        self::assertFalse($collection->allowAdd());
-//
-//        // By default, $collection contains 2 elements
-//        $data   = [];
-//        $data[] = 'blue';
-//        $data[] = 'green';
-//
-//        $collection->populateValues($data);
-//        self::assertCount(2, $collection->getElements());
-//
-//        $this->expectException(DomainException::class);
-//        $data[] = 'orange';
-//        $collection->populateValues($data);
-//    }
-//
-//    /**
-//     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-//     * @throws Exception
-//     * @throws InvalidArgumentException
-//     * @throws DomainException
-//     * @throws \Laminas\InputFilter\Exception\InvalidArgumentException
-//     */
-//    public function testGetErrorMessagesForInvalidCollectionElements(): void
-//    {
-//        self::markTestSkipped();
-//        // Configure InputFilter
-//        $inputFilter = $this->form->getInputFilter();
-//        $inputFilter->add(
-//            [
-//                'name' => 'colors',
-//                'type' => ArrayInput::class,
-//                'required' => true,
-//            ]
-//        );
-//        $inputFilter->add(
-//            [
-//                'name' => 'fieldsets',
-//                'type' => ArrayInput::class,
-//                'required' => true,
-//            ]
-//        );
-//
-//        $this->form->setData([]);
-//        $this->form->isValid();
-//
-//        self::assertSame(
-//            [
-//                'colors' => ['isEmpty' => "Value is required and can't be empty"],
-//                'fieldsets' => ['isEmpty' => "Value is required and can't be empty"],
-//            ],
-//            $this->form->getMessages()
-//        );
-//    }
 }
