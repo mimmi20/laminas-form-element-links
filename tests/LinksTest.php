@@ -15,6 +15,8 @@ namespace Mimmi20Test\Form\Element\Links;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Exception\BadMethodCallException;
 use Laminas\Navigation\Page\AbstractPage;
+use Laminas\Validator\NotEmpty;
+use Laminas\Validator\Uri;
 use Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\Form\Element\Links\Links;
 use Mimmi20Test\Form\Element\Links\TestAsset\TestFormStringUrl;
@@ -205,6 +207,36 @@ final class LinksTest extends TestCase
 
         self::assertSame($expectedSeperator, $links->getSeparator());
         self::assertSame($expectedLinks, $links->getLinks());
+    }
+
+    /**
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testSetValidator(): void
+    {
+        $validator = new NotEmpty();
+        $links     = new Links();
+
+        self::assertInstanceOf(Uri::class, $links->getValidator());
+
+        $links->setValidator($validator);
+        self::assertSame($validator, $links->getValidator());
+    }
+
+    /**
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testSetValue(): void
+    {
+        $value = 'test-value';
+        $links = new Links();
+
+        $links->setValue($value);
+        self::assertSame($value, $links->getValue());
     }
 
 //    /**
