@@ -14,6 +14,7 @@ namespace Mimmi20Test\Form\Element\Links;
 
 use Mimmi20\Form\Element\Links\ConfigProvider;
 use Mimmi20\Form\Element\Links\Links;
+use Mimmi20\Form\Element\Links\LinksInterface;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
@@ -45,6 +46,7 @@ final class ConfigProviderTest extends TestCase
         $aliases = $formElementConfig['aliases'];
         self::assertIsArray($aliases);
         self::assertArrayHasKey('links', $aliases);
+        self::assertArrayHasKey(LinksInterface::class, $aliases);
     }
 
     /**
@@ -68,5 +70,6 @@ final class ConfigProviderTest extends TestCase
         $aliases = $formElementConfig['aliases'];
         self::assertIsArray($aliases);
         self::assertArrayHasKey('links', $aliases);
+        self::assertArrayHasKey(LinksInterface::class, $aliases);
     }
 }

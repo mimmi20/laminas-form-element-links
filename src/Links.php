@@ -25,7 +25,7 @@ use function is_array;
 use function is_iterable;
 use function is_string;
 
-final class Links extends Element implements InputProviderInterface
+final class Links extends Element implements InputProviderInterface, LinksInterface
 {
     private ?ValidatorInterface $validator = null;
 
