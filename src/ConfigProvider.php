@@ -38,6 +38,7 @@ final class ConfigProvider
         return [
             'aliases' => [
                 'links' => Links::class,
+                LinksInterface::class => Links::class,
             ],
             'factories' => [
                 Links::class => ElementFactory::class,
