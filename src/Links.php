@@ -150,6 +150,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * Provide default input rules for this element
      *
      * @return array<string, array<int, array<string, class-string>|ValidatorInterface>|int|string|false>
+     * @phpstan-return array('name' => string|null, 'required' => false)
      */
     public function getInputSpecification(): array
     {

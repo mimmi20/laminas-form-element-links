@@ -12,12 +12,13 @@ declare(strict_types = 1);
 
 namespace Mimmi20\Form\Element\Links;
 
+use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
 use Mezzio\Navigation\Page\PageInterface;
 use Traversable;
 
-interface LinksInterface
+interface LinksInterface extends ElementInterface
 {
     /**
      * Accepted options for MultiCheckbox:
@@ -27,9 +28,13 @@ interface LinksInterface
      *
      * @param array<int, AbstractPage|array|PageInterface|string>|Traversable $options
      *
+     * @return self
+     *
      * @throws InvalidArgumentException
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
-    public function setOptions($options): self;
+    public function setOptions($options);
 
     /**
      * @return array<int, array<string, string|null>>
@@ -39,11 +44,20 @@ interface LinksInterface
     /**
      * @param array<int, AbstractPage|array|PageInterface|string>|iterable $links
      *
+     * @return self
+     *
      * @throws InvalidArgumentException
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
-    public function setLinks(iterable $links): self;
+    public function setLinks(iterable $links);
 
     public function getSeparator(): string;
 
-    public function setSeparator(string $separator): self;
+    /**
+     * @return self
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
+     */
+    public function setSeparator(string $separator);
 }
