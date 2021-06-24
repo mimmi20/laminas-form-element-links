@@ -48,13 +48,35 @@ final class LinksTest extends TestCase
      * @throws Exception
      * @throws InvalidArgumentException
      */
+    public function testGetInputSpecification(): void
+    {
+        $name     = 'test-name';
+        $expected = [
+            'name' => $name,
+            'required' => false,
+        ];
+        $links    = new Links();
+
+        $links->setName($name);
+
+        self::assertSame($name, $links->getName());
+        self::assertSame($expected, $links->getInputSpecification());
+    }
+
+    /**
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testSetStringHref(): void
     {
-        $href          = 'http://www.test.com';
-        $expectedLinks = [['href' => $href]];
+        $href1         = 'http://www.test.com';
+        $href2         = 'http://www.test.org';
+        $href3         = 'http://www.test.org/test';
+        $expectedLinks = [['href' => $href1], ['href' => $href2], ['href' => $href3]];
         $links         = new Links();
 
-        $links->setLinks([$href]);
+        $links->setLinks([$href1, $href2, $href3]);
 
         self::assertSame($expectedLinks, $links->getLinks());
     }
@@ -79,9 +101,11 @@ final class LinksTest extends TestCase
      */
     public function testSetArrayHref(): void
     {
-        $href          = 'http://www.test.com';
+        $href1         = 'http://www.test.com';
+        $href2         = 'http://www.test.org';
+        $href3         = 'http://www.test.org/test';
         $id            = 'abc';
-        $expectedLinks = [['href' => $href, 'id' => $id]];
+        $expectedLinks = [['href' => $href1, 'id' => $id], ['href' => $href2, 'id' => $id], ['href' => $href3, 'id' => $id]];
         $links         = new Links();
 
         $links->setLinks($expectedLinks);
@@ -97,39 +121,89 @@ final class LinksTest extends TestCase
      */
     public function testSetAbstractPage(): void
     {
-        $href   = 'http://www.test.com';
+        $href1  = 'http://www.test.com';
+        $href2  = 'http://www.test.org';
+        $href3  = 'http://www.test.org/test';
         $id     = 'abc';
         $title  = 'test-title';
         $class  = 'test-class';
         $target = null;
         $label  = 'test-label';
 
-        $page = $this->getMockBuilder(AbstractPage::class)
+        $page1 = $this->getMockBuilder(AbstractPage::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getId')
             ->willReturn($id);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getTitle')
             ->willReturn($title);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getClass')
             ->willReturn($class);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getHref')
-            ->willReturn($href);
-        $page->expects(self::once())
+            ->willReturn($href1);
+        $page1->expects(self::once())
             ->method('getTarget')
             ->willReturn($target);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getLabel')
             ->willReturn($label);
 
-        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target, 'label' => $label]];
+        $page2 = $this->getMockBuilder(AbstractPage::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $page2->expects(self::once())
+            ->method('getId')
+            ->willReturn($id);
+        $page2->expects(self::once())
+            ->method('getTitle')
+            ->willReturn($title);
+        $page2->expects(self::once())
+            ->method('getClass')
+            ->willReturn($class);
+        $page2->expects(self::once())
+            ->method('getHref')
+            ->willReturn($href2);
+        $page2->expects(self::once())
+            ->method('getTarget')
+            ->willReturn($target);
+        $page2->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
+
+        $page3 = $this->getMockBuilder(AbstractPage::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $page3->expects(self::once())
+            ->method('getId')
+            ->willReturn($id);
+        $page3->expects(self::once())
+            ->method('getTitle')
+            ->willReturn($title);
+        $page3->expects(self::once())
+            ->method('getClass')
+            ->willReturn($class);
+        $page3->expects(self::once())
+            ->method('getHref')
+            ->willReturn($href3);
+        $page3->expects(self::once())
+            ->method('getTarget')
+            ->willReturn($target);
+        $page3->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
+
+        $expectedLinks = [
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href1, 'target' => $target, 'label' => $label],
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href2, 'target' => $target, 'label' => $label],
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href3, 'target' => $target, 'label' => $label],
+        ];
         $links         = new Links();
 
-        $links->setLinks([$page]);
+        $links->setLinks([$page1, $page2, $page3]);
 
         self::assertSame($expectedLinks, $links->getLinks());
     }
@@ -141,39 +215,89 @@ final class LinksTest extends TestCase
      */
     public function testSetPageInterface(): void
     {
-        $href   = 'http://www.test.com';
+        $href1  = 'http://www.test.com';
+        $href2  = 'http://www.test.org';
+        $href3  = 'http://www.test.org/test';
         $id     = 'abc';
         $title  = 'test-title';
         $class  = 'test-class';
         $target = null;
         $label  = 'test-label';
 
-        $page = $this->getMockBuilder(PageInterface::class)
+        $page1 = $this->getMockBuilder(PageInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getId')
             ->willReturn($id);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getTitle')
             ->willReturn($title);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getClass')
             ->willReturn($class);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getHref')
-            ->willReturn($href);
-        $page->expects(self::once())
+            ->willReturn($href1);
+        $page1->expects(self::once())
             ->method('getTarget')
             ->willReturn($target);
-        $page->expects(self::once())
+        $page1->expects(self::once())
             ->method('getLabel')
             ->willReturn($label);
 
-        $expectedLinks = [['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href, 'target' => $target, 'label' => $label]];
+        $page2 = $this->getMockBuilder(PageInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $page2->expects(self::once())
+            ->method('getId')
+            ->willReturn($id);
+        $page2->expects(self::once())
+            ->method('getTitle')
+            ->willReturn($title);
+        $page2->expects(self::once())
+            ->method('getClass')
+            ->willReturn($class);
+        $page2->expects(self::once())
+            ->method('getHref')
+            ->willReturn($href2);
+        $page2->expects(self::once())
+            ->method('getTarget')
+            ->willReturn($target);
+        $page2->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
+
+        $page3 = $this->getMockBuilder(PageInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $page3->expects(self::once())
+            ->method('getId')
+            ->willReturn($id);
+        $page3->expects(self::once())
+            ->method('getTitle')
+            ->willReturn($title);
+        $page3->expects(self::once())
+            ->method('getClass')
+            ->willReturn($class);
+        $page3->expects(self::once())
+            ->method('getHref')
+            ->willReturn($href3);
+        $page3->expects(self::once())
+            ->method('getTarget')
+            ->willReturn($target);
+        $page3->expects(self::once())
+            ->method('getLabel')
+            ->willReturn($label);
+
+        $expectedLinks = [
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href1, 'target' => $target, 'label' => $label],
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href2, 'target' => $target, 'label' => $label],
+            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href3, 'target' => $target, 'label' => $label],
+        ];
         $links         = new Links();
 
-        $links->setLinks([$page]);
+        $links->setLinks([$page1, $page2, $page3]);
 
         self::assertSame($expectedLinks, $links->getLinks());
     }
@@ -246,8 +370,7 @@ final class LinksTest extends TestCase
         $expectedSeperator = ' || ';
         $links             = new Links();
 
-        $links->setValue($expectedSeperator);
-
+        self::assertSame($links, $links->setValue($expectedSeperator));
         self::assertNotSame($expectedSeperator, $links->getValue());
     }
 }
