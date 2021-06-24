@@ -27,8 +27,6 @@ use function is_string;
 
 final class Links extends Element implements InputProviderInterface, LinksInterface
 {
-    private ?ValidatorInterface $validator = null;
-
     /** @var array<int, array<string, string|null>> */
     private array $links = [];
 
