@@ -14,7 +14,6 @@ namespace Mimmi20Test\Form\Element\Links;
 
 use Laminas\Form\Exception\DomainException;
 use Laminas\Form\Exception\InvalidArgumentException;
-use Laminas\Navigation\Exception\BadMethodCallException;
 use Laminas\Navigation\Page\AbstractPage;
 use Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\Form\Element\Links\Links;
@@ -117,7 +116,6 @@ final class LinksTest extends TestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws BadMethodCallException
      */
     public function testSetAbstractPage(): void
     {

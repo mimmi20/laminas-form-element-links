@@ -10,11 +10,16 @@ parameters:
     - %currentWorkingDirectory%/vendor/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/src/Util/Tokens.php
-  exceptionRules:
-    reportUnusedCatchesOfUncheckedExceptions: true
-    uncheckedExceptions: []
+  checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
-  excludes_analyse:
-    - */tests/*/data/*
-  ignoreErrors:
-    - '~PHPDoc tag @throws with type .* is not compatible with parent~'
+  treatPhpDocTypesAsCertain: false
+  implicitThrows: false
+  exceptions:
+    checkedExceptionRegexes:
+      - '#Exception#'
+      - '#Throwable#'
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+#  ignoreErrors:
+#    - '~PHPDoc tag @throws with type .* is not compatible with parent~'
