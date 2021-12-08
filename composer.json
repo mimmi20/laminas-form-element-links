@@ -17,7 +17,7 @@
     "laminas/laminas-form": "^3.0.1",
     "laminas/laminas-hydrator": "^4.3.1",
     "laminas/laminas-inputfilter": "^2.12.1",
-    "laminas/laminas-validator": "^2.15.0"
+    "laminas/laminas-validator": "^2.15.1"
   },
   "require-dev": {
     "ext-intl": "*",
