@@ -1,9 +1,8 @@
 {
   "name": "mimmi20/laminas-form-element-links",
-  "type": "library",
   "description": "Provides an additional Form Element",
-  "homepage": "https://github.com/mimmi20/laminas-form-element-links",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Thomas Müller",
@@ -11,20 +10,26 @@
       "role": "Developer"
     }
   ],
+  "homepage": "https://github.com/mimmi20/laminas-form-element-links",
+  "support": {
+    "issues": "https://github.com/mimmi20/laminas-form-element-links/issues",
+    "source": "https://github.com/mimmi20/laminas-form-element-links"
+  },
   "require": {
     "php": "^7.4.3 || ^8.0.0",
     "ext-mbstring": "*",
-    "laminas/laminas-form": "^3.0.1",
+    "laminas/laminas-form": "^3.1.0",
     "laminas/laminas-hydrator": "^4.3.1",
-    "laminas/laminas-inputfilter": "^2.12.1",
-    "laminas/laminas-validator": "^2.15.0"
+    "laminas/laminas-inputfilter": "^2.13.0",
+    "laminas/laminas-validator": "^2.15.1"
   },
   "require-dev": {
     "ext-intl": "*",
+    "ergebnis/composer-normalize": "^2.18.0",
     "laminas/laminas-dependency-plugin": "^2.2.0",
-    "laminas/laminas-i18n": "^2.12.0",
+    "laminas/laminas-i18n": "^2.13.0",
     "laminas/laminas-modulemanager": "^2.11.0",
-    "laminas/laminas-navigation": "^2.11.1",
+    "laminas/laminas-navigation": "^2.12.0",
     "mimmi20/coding-standard": "^2.5.1",
     "mimmi20/mezzio-navigation": "^2.0.7",
     "phpstan/extension-installer": "^1.1.0",
@@ -32,23 +37,13 @@
     "phpstan/phpstan-deprecation-rules": "^1.0.0",
     "phpstan/phpstan-phpunit": "^1.0.0",
     "phpunit/phpunit": "^9.5.10",
-    "rector/rector": "^0.12.5"
+    "rector/rector": "^0.12.6"
   },
   "suggest": {
     "ext-intl": "required to use the Translator",
     "laminas/laminas-i18n": "required to use the Translator",
     "laminas/laminas-navigation": "required to use objects of type AbstractPage to render the link",
     "mimmi20/mezzio-navigation": "required to use objects of type PageInterface to render the link"
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "extra": {
-    "laminas": {
-      "component": "Mimmi20\\Form\\Element\\Links",
-      "config-provider": "Mimmi20\\Form\\Element\\Links\\ConfigProvider"
-    }
   },
   "autoload": {
     "psr-4": {
@@ -60,8 +55,14 @@
       "Mimmi20Test\\Form\\Element\\Links\\": "tests/"
     }
   },
-  "support": {
-    "issues": "https://github.com/mimmi20/laminas-form-element-links/issues",
-    "source": "https://github.com/mimmi20/laminas-form-element-links"
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "laminas": {
+      "component": "Mimmi20\\Form\\Element\\Links",
+      "config-provider": "Mimmi20\\Form\\Element\\Links\\ConfigProvider"
+    }
   }
 }
