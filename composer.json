@@ -25,7 +25,7 @@
     "laminas/laminas-i18n": "^2.12.0",
     "laminas/laminas-modulemanager": "^2.11.0",
     "laminas/laminas-navigation": "^2.11.1",
-    "mimmi20/coding-standard": "^2.5.1",
+    "mimmi20/coding-standard": "^2.5.2",
     "mimmi20/mezzio-navigation": "^2.0.7",
     "phpstan/extension-installer": "^1.1.0",
     "phpstan/phpstan": "^1.2.0",
