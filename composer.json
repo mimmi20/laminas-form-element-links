@@ -21,7 +21,8 @@
     "laminas/laminas-form": "^3.8.0",
     "laminas/laminas-hydrator": "^4.11.0",
     "laminas/laminas-inputfilter": "^2.22.1",
-    "laminas/laminas-validator": "^2.29.0"
+    "laminas/laminas-validator": "^2.29.0",
+    "laminas/laminas-view": "^2.25.0"
   },
   "require-dev": {
     "ext-dom": "*",
@@ -30,7 +31,6 @@
     "ext-tokenizer": "*",
     "ext-xml": "*",
     "ext-xmlwriter": "*",
-    "laminas/laminas-dependency-plugin": "^2.2.0",
     "laminas/laminas-i18n": "^2.21.0",
     "laminas/laminas-modulemanager": "^2.14.0",
     "laminas/laminas-navigation": "^2.18.1",
@@ -50,12 +50,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Mimmi20\\Form\\Element\\Links\\": "src/"
+      "Mimmi20\\Form\\Links\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Mimmi20Test\\Form\\Element\\Links\\": "tests/"
+      "Mimmi20Test\\Form\\Links\\": "tests/"
     }
   },
   "config": {
@@ -64,14 +64,13 @@
     "sort-packages": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "laminas/laminas-dependency-plugin": true,
       "phpstan/extension-installer": true
     }
   },
   "extra": {
     "laminas": {
-      "component": "Mimmi20\\Form\\Element\\Links",
-      "config-provider": "Mimmi20\\Form\\Element\\Links\\ConfigProvider"
+      "component": "Mimmi20\\Form\\Links",
+      "config-provider": "Mimmi20\\Form\\Links\\ConfigProvider"
     }
   }
 }

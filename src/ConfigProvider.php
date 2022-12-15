@@ -10,7 +10,7 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20\Form\Element\Links;
+namespace Mimmi20\Form\Links;
 
 use Laminas\Form\ElementFactory;
 
@@ -26,6 +26,7 @@ final class ConfigProvider
     {
         return [
             'form_elements' => $this->getFormElementConfig(),
+            'view_helpers' => $this->getViewHelperConfig(),
         ];
     }
 
@@ -44,6 +45,27 @@ final class ConfigProvider
             ],
             'factories' => [
                 Links::class => ElementFactory::class,
+            ],
+        ];
+    }
+
+    /**
+     * Return application-level dependency configuration.
+     *
+     * @return array<string, array<string, string>>
+     * @phpstan-return array{aliases: array<string, class-string>, factories: array<class-string, class-string>}
+     */
+    public function getViewHelperConfig(): array
+    {
+        return [
+            'aliases' => [
+                'formlinks' => FormLinks::class,
+                'form_links' => FormLinks::class,
+                'formLinks' => FormLinks::class,
+                'FormLinks' => FormLinks::class,
+            ],
+            'factories' => [
+                FormLinks::class => FormLinksFactory::class,
             ],
         ];
     }
