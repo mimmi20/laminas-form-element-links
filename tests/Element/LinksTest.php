@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,19 +10,17 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20Test\Form\Element\Links;
+namespace Mimmi20Test\Form\Links\Element;
 
 use Laminas\Form\Exception\DomainException;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
-use Mezzio\Navigation\Page\PageInterface;
-use Mimmi20\Form\Element\Links\Links;
-use Mimmi20Test\Form\Element\Links\TestAsset\TestFormStringUrl;
+use Mimmi20\Form\Links\Element\Links;
+use Mimmi20Test\Form\Links\TestAsset\TestFormStringUrl;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
-use function get_class;
 use function sprintf;
 
 final class LinksTest extends TestCase
@@ -80,9 +78,7 @@ final class LinksTest extends TestCase
         self::assertSame($expectedLinks, $links->getLinks());
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     public function testSetArrayWithoutHref(): void
     {
         $links = new Links();
@@ -206,103 +202,7 @@ final class LinksTest extends TestCase
         self::assertSame($expectedLinks, $links->getLinks());
     }
 
-    /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
-    public function testSetPageInterface(): void
-    {
-        $href1  = 'http://www.test.com';
-        $href2  = 'http://www.test.org';
-        $href3  = 'http://www.test.org/test';
-        $id     = 'abc';
-        $title  = 'test-title';
-        $class  = 'test-class';
-        $target = null;
-        $label  = 'test-label';
-
-        $page1 = $this->getMockBuilder(PageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page1->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page1->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page1->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page1->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href1);
-        $page1->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page1->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $page2 = $this->getMockBuilder(PageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page2->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page2->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page2->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page2->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href2);
-        $page2->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page2->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $page3 = $this->getMockBuilder(PageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page3->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page3->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page3->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page3->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href3);
-        $page3->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page3->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $expectedLinks = [
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href1, 'target' => $target, 'label' => $label],
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href2, 'target' => $target, 'label' => $label],
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href3, 'target' => $target, 'label' => $label],
-        ];
-        $links         = new Links();
-
-        $links->setLinks([$page1, $page2, $page3]);
-
-        self::assertSame($expectedLinks, $links->getLinks());
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     public function testSetWrongDatatype(): void
     {
         $links = new Links();
@@ -331,8 +231,8 @@ final class LinksTest extends TestCase
             sprintf(
                 '$colle$linksction should be an Instance of %s, but was %s',
                 Links::class,
-                get_class($links)
-            )
+                $links::class,
+            ),
         );
 
         self::assertSame($expectedSeperator, $links->getSeparator());
@@ -354,7 +254,7 @@ final class LinksTest extends TestCase
         self::assertTrue($form->isValid());
         self::assertSame(
             [],
-            $form->getMessages()
+            $form->getMessages(),
         );
     }
 

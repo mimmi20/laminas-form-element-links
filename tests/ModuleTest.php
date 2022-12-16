@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,9 +10,9 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20Test\Form\Element\Links;
+namespace Mimmi20Test\Form\Links;
 
-use Mimmi20\Form\Element\Links\Module;
+use Mimmi20\Form\Links\Module;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
@@ -30,8 +30,9 @@ final class ModuleTest extends TestCase
         $config = $module->getConfig();
 
         self::assertIsArray($config);
-        self::assertCount(1, $config);
+        self::assertCount(2, $config);
         self::assertArrayHasKey('form_elements', $config);
+        self::assertArrayHasKey('view_helpers', $config);
     }
 
     /**

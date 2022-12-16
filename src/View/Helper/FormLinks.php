@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the mimmi20/laminasviewrenderer-bootstrap-form package.
+ * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,7 @@ use Laminas\Form\Exception;
 use Laminas\Form\View\Helper\AbstractHelper;
 use Laminas\I18n\View\Helper\Translate;
 use Laminas\View\Helper\EscapeHtml;
-use Mimmi20\Form\Element\Links\LinksInterface as LinksElement;
+use Mimmi20\Form\Links\Element\LinksInterface as LinksElement;
 
 use function array_key_exists;
 use function array_merge;
@@ -25,8 +25,10 @@ use function array_unique;
 use function assert;
 use function explode;
 use function implode;
+use function is_int;
 use function is_string;
 use function sprintf;
+use function str_repeat;
 use function trim;
 
 use const PHP_EOL;
@@ -51,12 +53,15 @@ final class FormLinks extends AbstractHelper
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
      */
     protected $translatableAttributes = ['title' => true];
-    private ?Translate $translate;
+    private Translate | null $translate;
     private EscapeHtml $escapeHtml;
 
+    private string $indent = '';
+
+    /** @throws void */
     public function __construct(
         EscapeHtml $escaper,
-        ?Translate $translator = null
+        Translate | null $translator = null,
     ) {
         $this->escapeHtml = $escaper;
         $this->translate  = $translator;
@@ -71,7 +76,7 @@ final class FormLinks extends AbstractHelper
      *
      * @throws Exception\InvalidArgumentException
      */
-    public function __invoke(?ElementInterface $element = null)
+    public function __invoke(ElementInterface | null $element = null)
     {
         if (!$element) {
             return $this;
@@ -92,8 +97,8 @@ final class FormLinks extends AbstractHelper
                 sprintf(
                     '%s requires that the element is of type %s',
                     __METHOD__,
-                    LinksElement::class
-                )
+                    LinksElement::class,
+                ),
             );
         }
 
@@ -133,7 +138,7 @@ final class FormLinks extends AbstractHelper
             $renderedLinks[] = sprintf(
                 '<a %s>%s</a>',
                 $this->createAttributesString($linkAttributes),
-                $label
+                $label,
             );
         }
 
@@ -142,13 +147,13 @@ final class FormLinks extends AbstractHelper
         return $indent . implode(PHP_EOL . $indent . $element->getSeparator() . PHP_EOL . $indent, $renderedLinks);
     }
 
-    private string $indent = '';
-
     /**
      * Set the indentation string for using in {@link render()}, optionally a
      * number of spaces to indent with
      *
      * @param int|string $indent
+     *
+     * @throws void
      */
     public function setIndent($indent): self
     {
@@ -159,6 +164,8 @@ final class FormLinks extends AbstractHelper
 
     /**
      * Returns indentation
+     *
+     * @throws void
      */
     public function getIndent(): string
     {
@@ -171,6 +178,8 @@ final class FormLinks extends AbstractHelper
      * Retrieve whitespace representation of $indent
      *
      * @param int|string $indent
+     *
+     * @throws void
      */
     protected function getWhitespace($indent): string
     {

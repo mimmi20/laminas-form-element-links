@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the mimmi20/laminasviewrenderer-bootstrap-form package.
+ * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,16 +19,13 @@ use Laminas\View\HelperPluginManager;
 use Psr\Container\ContainerExceptionInterface;
 
 use function assert;
-use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
 
 final class FormLinksFactory
 {
-    /**
-     * @throws ContainerExceptionInterface
-     */
+    /** @throws ContainerExceptionInterface */
     public function __invoke(ContainerInterface $container): FormLinks
     {
         $plugin = $container->get(HelperPluginManager::class);
@@ -37,8 +34,8 @@ final class FormLinksFactory
             sprintf(
                 '$plugin should be an Instance of %s, but was %s',
                 HelperPluginManager::class,
-                is_object($plugin) ? get_class($plugin) : gettype($plugin)
-            )
+                is_object($plugin) ? $plugin::class : gettype($plugin),
+            ),
         );
 
         $translator = null;

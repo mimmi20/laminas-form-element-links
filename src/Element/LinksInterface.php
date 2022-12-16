@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,12 +10,11 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20\Form\Element\Links;
+namespace Mimmi20\Form\Links\Element;
 
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
-use Mezzio\Navigation\Page\PageInterface;
 use Traversable;
 
 interface LinksInterface extends ElementInterface
@@ -26,7 +25,7 @@ interface LinksInterface extends ElementInterface
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param array<int, AbstractPage|array|PageInterface|string>|Traversable $options
+     * @param array<int, AbstractPage|array|string>|Traversable $options
      *
      * @return self
      *
@@ -38,11 +37,13 @@ interface LinksInterface extends ElementInterface
 
     /**
      * @return array<int, array<string, string|null>>
+     *
+     * @throws void
      */
     public function getLinks(): array;
 
     /**
-     * @param array<int, AbstractPage|array|PageInterface|string>|iterable $links
+     * @param array<int, AbstractPage|array|string>|iterable $links
      *
      * @return self
      *
@@ -52,10 +53,13 @@ interface LinksInterface extends ElementInterface
      */
     public function setLinks(iterable $links);
 
+    /** @throws void */
     public function getSeparator(): string;
 
     /**
      * @return self
+     *
+     * @throws void
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */

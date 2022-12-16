@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,11 +10,12 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20Test\Form\Element\Links;
+namespace Mimmi20Test\Form\Links;
 
-use Mimmi20\Form\Element\Links\ConfigProvider;
-use Mimmi20\Form\Element\Links\Links;
-use Mimmi20\Form\Element\Links\LinksInterface;
+use Mimmi20\Form\Links\ConfigProvider;
+use Mimmi20\Form\Links\Element\Links;
+use Mimmi20\Form\Links\Element\LinksInterface;
+use Mimmi20\Form\Links\View\Helper\FormLinks;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
@@ -23,6 +24,7 @@ final class ConfigProviderTest extends TestCase
 {
     private ConfigProvider $provider;
 
+    /** @throws void */
     protected function setUp(): void
     {
         $this->provider = new ConfigProvider();
@@ -47,6 +49,29 @@ final class ConfigProviderTest extends TestCase
         self::assertIsArray($aliases);
         self::assertArrayHasKey('links', $aliases);
         self::assertArrayHasKey(LinksInterface::class, $aliases);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testProviderDefinesExpectedFactoryServices2(): void
+    {
+        $formElementConfig = $this->provider->getViewHelperConfig();
+        self::assertIsArray($formElementConfig);
+
+        self::assertArrayHasKey('factories', $formElementConfig);
+        $factories = $formElementConfig['factories'];
+        self::assertIsArray($factories);
+        self::assertArrayHasKey(FormLinks::class, $factories);
+
+        self::assertArrayHasKey('aliases', $formElementConfig);
+        $aliases = $formElementConfig['aliases'];
+        self::assertIsArray($aliases);
+        self::assertArrayHasKey('formlinks', $aliases);
+        self::assertArrayHasKey('form_links', $aliases);
+        self::assertArrayHasKey('formLinks', $aliases);
+        self::assertArrayHasKey('FormLinks', $aliases);
     }
 
     /**
