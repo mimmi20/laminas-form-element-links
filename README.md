@@ -10,12 +10,17 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mimmi20/laminas-form-element-links.svg)](http://isitmaintained.com/project/mimmi20/laminas-form-element-links "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mimmi20/laminas-form-element-links.svg)](http://isitmaintained.com/project/mimmi20/laminas-form-element-links "Percentage of issues still open")
 
+
+## Requirements
+
+This library requires PHP 8.1+.
+
 ## Installation
 
 Run
 
-```
-$ composer require mimmi20/laminas-form-element-links
+```shell
+composer require mimmi20/laminas-form-element-links
 ```
 
 ## License

@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,14 +10,13 @@
 
 declare(strict_types = 1);
 
-namespace Mimmi20\Form\Element\Links;
+namespace Mimmi20\Form\Links\Element;
 
 use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Validator\ValidatorInterface;
-use Mezzio\Navigation\Page\PageInterface;
 use Traversable;
 
 use function array_key_exists;
@@ -41,7 +40,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param array<int, AbstractPage|array|PageInterface|string>|Traversable $options
+     * @param array<int, AbstractPage|array|string>|Traversable $options
      *
      * @throws InvalidArgumentException
      */
@@ -68,6 +67,8 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
 
     /**
      * @return array<int, array<string, string|null>>
+     *
+     * @throws void
      */
     public function getLinks(): array
     {
@@ -75,7 +76,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     }
 
     /**
-     * @param array<int, AbstractPage|array|PageInterface|string>|iterable $links
+     * @param array<int, AbstractPage|array|string>|iterable $links
      *
      * @throws InvalidArgumentException
      */
@@ -86,17 +87,19 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
         foreach ($links as $link) {
             if (is_string($link)) {
                 $this->links[] = ['href' => $link];
+
                 continue;
             }
 
             if (is_array($link)) {
                 if (!array_key_exists('href', $link)) {
                     throw new InvalidArgumentException(
-                        'The href property is required when using an array for links'
+                        'The href property is required when using an array for links',
                     );
                 }
 
                 $this->links[] = $link;
+
                 continue;
             }
 
@@ -109,34 +112,29 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
                     'target' => $link->getTarget(),
                     'label' => $link->getLabel(),
                 ];
-                continue;
-            }
 
-            if ($link instanceof PageInterface) {
-                $this->links[] = [
-                    'id' => $link->getId(),
-                    'title' => $link->getTitle(),
-                    'class' => $link->getClass(),
-                    'href' => $link->getHref(),
-                    'target' => $link->getTarget(),
-                    'label' => $link->getLabel(),
-                ];
                 continue;
             }
 
             throw new InvalidArgumentException(
-                'elements to used as links must be string, array, AbstractPage or PageInterface'
+                'elements to used as links must be string, array, AbstractPage or PageInterface',
             );
         }
 
         return $this;
     }
 
+    /** @throws void */
     public function getSeparator(): string
     {
         return $this->separator;
     }
 
+    /**
+     * @return $this
+     *
+     * @throws void
+     */
     public function setSeparator(string $separator): self
     {
         $this->separator = $separator;
@@ -149,6 +147,8 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @return array<string, array<int, array<string, class-string>|ValidatorInterface>|false|int|string>
      * @phpstan-return array('name' => string|null, 'required' => false)
+     *
+     * @throws void
      */
     public function getInputSpecification(): array
     {
@@ -162,6 +162,8 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * Set the element value, As this Element has no value to send with the form, no value is set
      *
      * @param mixed $value
+     *
+     * @throws void
      *
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
