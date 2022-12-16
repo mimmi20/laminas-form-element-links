@@ -57,16 +57,16 @@ final class ConfigProviderTest extends TestCase
      */
     public function testProviderDefinesExpectedFactoryServices2(): void
     {
-        $formElementConfig = $this->provider->getViewHelperConfig();
-        self::assertIsArray($formElementConfig);
+        $viewHelperConfig = $this->provider->getViewHelperConfig();
+        self::assertIsArray($viewHelperConfig);
 
-        self::assertArrayHasKey('factories', $formElementConfig);
-        $factories = $formElementConfig['factories'];
+        self::assertArrayHasKey('factories', $viewHelperConfig);
+        $factories = $viewHelperConfig['factories'];
         self::assertIsArray($factories);
         self::assertArrayHasKey(FormLinks::class, $factories);
 
-        self::assertArrayHasKey('aliases', $formElementConfig);
-        $aliases = $formElementConfig['aliases'];
+        self::assertArrayHasKey('aliases', $viewHelperConfig);
+        $aliases = $viewHelperConfig['aliases'];
         self::assertIsArray($aliases);
         self::assertArrayHasKey('formlinks', $aliases);
         self::assertArrayHasKey('form_links', $aliases);
@@ -84,6 +84,7 @@ final class ConfigProviderTest extends TestCase
 
         self::assertIsArray($config);
         self::assertArrayHasKey('form_elements', $config);
+        self::assertArrayHasKey('view_helpers', $config);
 
         $formElementConfig = $config['form_elements'];
         self::assertArrayHasKey('factories', $formElementConfig);
@@ -96,5 +97,21 @@ final class ConfigProviderTest extends TestCase
         self::assertIsArray($aliases);
         self::assertArrayHasKey('links', $aliases);
         self::assertArrayHasKey(LinksInterface::class, $aliases);
+
+        $viewHelperConfig = $config['view_helpers'];
+        self::assertIsArray($viewHelperConfig);
+
+        self::assertArrayHasKey('factories', $viewHelperConfig);
+        $factories = $viewHelperConfig['factories'];
+        self::assertIsArray($factories);
+        self::assertArrayHasKey(FormLinks::class, $factories);
+
+        self::assertArrayHasKey('aliases', $viewHelperConfig);
+        $aliases = $viewHelperConfig['aliases'];
+        self::assertIsArray($aliases);
+        self::assertArrayHasKey('formlinks', $aliases);
+        self::assertArrayHasKey('form_links', $aliases);
+        self::assertArrayHasKey('formLinks', $aliases);
+        self::assertArrayHasKey('FormLinks', $aliases);
     }
 }

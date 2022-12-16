@@ -53,7 +53,7 @@ final class FormLinksFactoryTest extends TestCase
             ->willReturn(true);
         $helperPluginManager->expects(self::exactly(2))
             ->method('get')
-            ->withConsecutive([Translate::class], [EscapeHtml::class])
+            ->withConsecutive([Translate::class, null], [EscapeHtml::class, null])
             ->willReturnOnConsecutiveCalls($translatePlugin, $escapeHtml);
 
         $container = $this->getMockBuilder(ContainerInterface::class)
@@ -87,7 +87,7 @@ final class FormLinksFactoryTest extends TestCase
             ->willReturn(false);
         $helperPluginManager->expects(self::once())
             ->method('get')
-            ->with(EscapeHtml::class)
+            ->with(EscapeHtml::class, null)
             ->willReturn($escapeHtml);
 
         $container = $this->getMockBuilder(ContainerInterface::class)
@@ -120,6 +120,71 @@ final class FormLinksFactoryTest extends TestCase
         $this->expectException(AssertionError::class);
         $this->expectExceptionCode(1);
         $this->expectExceptionMessage('$plugin should be an Instance of Laminas\View\HelperPluginManager, but was boolean');
+
+        ($this->factory)($container);
+    }
+
+    /** @throws Exception */
+    public function testInvocationWithoutTranslator2(): void
+    {
+        $escapeHtml = $this->createMock(EscapeHtml::class);
+
+        $helperPluginManager = $this->getMockBuilder(HelperPluginManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $helperPluginManager->expects(self::once())
+            ->method('has')
+            ->with(Translate::class)
+            ->willReturn(false);
+        $helperPluginManager->expects(self::once())
+            ->method('get')
+            ->with(EscapeHtml::class, null)
+            ->willReturn(null);
+
+        $container = $this->getMockBuilder(ContainerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $container->expects(self::once())
+            ->method('get')
+            ->with(HelperPluginManager::class)
+            ->willReturn($helperPluginManager);
+
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionCode(1);
+        $this->expectExceptionMessage('assert($escapeHtml instanceof EscapeHtml)');
+
+        ($this->factory)($container);
+    }
+
+    /** @throws Exception */
+    public function testInvocationWithTranslator2(): void
+    {
+        $translatePlugin = $this->createMock(Translate::class);
+        $escapeHtml      = $this->createMock(EscapeHtml::class);
+
+        $helperPluginManager = $this->getMockBuilder(HelperPluginManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $helperPluginManager->expects(self::once())
+            ->method('has')
+            ->with(Translate::class)
+            ->willReturn(true);
+        $helperPluginManager->expects(self::once())
+            ->method('get')
+            ->with(Translate::class, null)
+            ->willReturn(null);
+
+        $container = $this->getMockBuilder(ContainerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $container->expects(self::once())
+            ->method('get')
+            ->with(HelperPluginManager::class)
+            ->willReturn($helperPluginManager);
+
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionCode(1);
+        $this->expectExceptionMessage('assert($translator instanceof Translate)');
 
         ($this->factory)($container);
     }

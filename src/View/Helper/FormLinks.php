@@ -19,7 +19,9 @@ use Laminas\I18n\View\Helper\Translate;
 use Laminas\View\Helper\EscapeHtml;
 use Mimmi20\Form\Links\Element\LinksInterface as LinksElement;
 
+use function array_filter;
 use function array_key_exists;
+use function array_map;
 use function array_merge;
 use function array_unique;
 use function assert;
@@ -122,7 +124,16 @@ final class FormLinks extends AbstractHelper
             }
 
             $linkAttributes          = array_merge($attributes, $link);
-            $linkAttributes['class'] = trim(implode(' ', array_unique($classes)));
+            $linkAttributes['class'] = implode(
+                ' ',
+                array_filter(
+                    array_map(
+                        static fn (string $value): string => trim($value),
+                        array_unique($classes),
+                    ),
+                    static fn (string $value): bool => !empty($value),
+                ),
+            );
 
             if ('' !== $label) {
                 // Translate the label
@@ -151,11 +162,9 @@ final class FormLinks extends AbstractHelper
      * Set the indentation string for using in {@link render()}, optionally a
      * number of spaces to indent with
      *
-     * @param int|string $indent
-     *
      * @throws void
      */
-    public function setIndent($indent): self
+    public function setIndent(int | string $indent): self
     {
         $this->indent = $this->getWhitespace($indent);
 
@@ -177,16 +186,14 @@ final class FormLinks extends AbstractHelper
     /**
      * Retrieve whitespace representation of $indent
      *
-     * @param int|string $indent
-     *
      * @throws void
      */
-    protected function getWhitespace($indent): string
+    private function getWhitespace(int | string $indent): string
     {
         if (is_int($indent)) {
             $indent = str_repeat(' ', $indent);
         }
 
-        return (string) $indent;
+        return $indent;
     }
 }
