@@ -22,7 +22,7 @@
     "laminas/laminas-hydrator": "^4.11.0",
     "laminas/laminas-inputfilter": "^2.22.1",
     "laminas/laminas-validator": "^2.29.0",
-    "laminas/laminas-view": "^2.25.0"
+    "laminas/laminas-view": "^2.25.2"
   },
   "require-dev": {
     "ext-dom": "*",
