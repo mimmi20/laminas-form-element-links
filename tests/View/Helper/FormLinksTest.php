@@ -442,7 +442,6 @@ final class FormLinksTest extends TestCase
     {
         $class         = 'test-class';
         $ariaLabel     = 'test';
-        $linkClass2    = 'xyz';
         $attributes    = ['class' => $class, 'aria-label' => $ariaLabel];
         $label1        = 'test-label1';
         $label1Escaped = 'test-label1-escaped';
@@ -808,6 +807,70 @@ final class FormLinksTest extends TestCase
         $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL .
             $seperator . PHP_EOL .
             sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+
+        $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $escapeHtml->expects(self::exactly(2))
+            ->method('__invoke')
+            ->withConsecutive([$label1], [$label2])
+            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+
+        $helper = new FormLinks($escapeHtml, null);
+
+        $element = $this->getMockBuilder(LinksElement::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $element->expects(self::exactly(2))
+            ->method('getAttributes')
+            ->willReturn($attributes);
+        $element->expects(self::never())
+            ->method('getValue');
+        $element->expects(self::never())
+            ->method('getOption');
+        $element->expects(self::once())
+            ->method('getLinks')
+            ->willReturn(
+                [
+                    [
+                        'label' => $label1,
+                        'class' => $linkClass1,
+                        'href' => '#1',
+                    ],
+                    [
+                        'label' => $label2,
+                        'class' => $linkClass2,
+                        'href' => '#2',
+                    ],
+                ],
+            );
+        $element->expects(self::once())
+            ->method('getSeparator')
+            ->willReturn($seperator);
+
+        self::assertSame($expected, $helper($element));
+    }
+
+    /**
+     * @throws Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testInvokeDoubleLink3(): void
+    {
+        $class         = 'test-class';
+        $ariaLabel     = 'test';
+        $linkClass1    = 'abc';
+        $linkClass2    = 'xyz';
+        $attributes    = ['class' => $class . ' ' . $linkClass1 . ' ' . $linkClass2, 'aria-label' => $ariaLabel];
+        $label1        = 'test-label1';
+        $label1Escaped = 'test-label1-escaped';
+        $label2        = 'test-label2';
+        $label2Escaped = 'test-label2-escaped';
+        $seperator     = '||';
+
+        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $linkClass2, $label1Escaped) . PHP_EOL .
+            $seperator . PHP_EOL .
+            sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $linkClass2, $label2Escaped);
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
