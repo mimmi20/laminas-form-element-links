@@ -30,10 +30,7 @@ final class ConfigProvider
      */
     public function __invoke(): array
     {
-        return [
-            'form_elements' => $this->getFormElementConfig(),
-            'view_helpers' => $this->getViewHelperConfig(),
-        ];
+        return ['form_elements' => $this->getFormElementConfig(), 'view_helpers' => $this->getViewHelperConfig()];
     }
 
     /**
@@ -51,9 +48,7 @@ final class ConfigProvider
                 'links' => Links::class,
                 LinksInterface::class => Links::class,
             ],
-            'factories' => [
-                Links::class => ElementFactory::class,
-            ],
+            'factories' => [Links::class => ElementFactory::class],
         ];
     }
 
@@ -74,9 +69,7 @@ final class ConfigProvider
                 'formLinks' => FormLinks::class,
                 'FormLinks' => FormLinks::class,
             ],
-            'factories' => [
-                FormLinks::class => FormLinksFactory::class,
-            ],
+            'factories' => [FormLinks::class => FormLinksFactory::class],
         ];
     }
 }

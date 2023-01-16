@@ -114,7 +114,7 @@ final class FormLinks extends AbstractHelper
             $attributes = $element->getAttributes();
 
             if (array_key_exists('class', $attributes)) {
-                $classes = array_merge($classes, explode(' ', $attributes['class']));
+                $classes = explode(' ', $attributes['class']);
                 unset($attributes['class']);
             }
 
