@@ -191,8 +191,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -257,8 +261,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -325,8 +333,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -393,8 +405,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -460,8 +476,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -594,16 +614,24 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1Tranlated], [$label2Tranlated])
-            ->willReturnOnConsecutiveCalls($label1TranlatedEscaped, $label2TranlatedEscaped);
+            ->willReturnMap(
+                [
+                    [$label1Tranlated, EscapeHtml::RECURSE_NONE, $label1TranlatedEscaped],
+                    [$label2Tranlated, EscapeHtml::RECURSE_NONE, $label2TranlatedEscaped],
+                ],
+            );
 
         $translator = $this->getMockBuilder(Translate::class)
             ->disableOriginalConstructor()
             ->getMock();
         $translator->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1, $textDomain], [$label2, $textDomain])
-            ->willReturnOnConsecutiveCalls($label1Tranlated, $label2Tranlated);
+            ->willReturnMap(
+                [
+                    [$label1, $textDomain, null, $label1Tranlated],
+                    [$label2, $textDomain, null, $label2Tranlated],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, $translator);
 
@@ -745,8 +773,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -813,8 +845,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
@@ -877,8 +913,12 @@ final class FormLinksTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(2))
             ->method('__invoke')
-            ->withConsecutive([$label1], [$label2])
-            ->willReturnOnConsecutiveCalls($label1Escaped, $label2Escaped);
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
 
         $helper = new FormLinks($escapeHtml, null);
 
