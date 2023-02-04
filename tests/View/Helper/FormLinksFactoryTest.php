@@ -53,8 +53,12 @@ final class FormLinksFactoryTest extends TestCase
             ->willReturn(true);
         $helperPluginManager->expects(self::exactly(2))
             ->method('get')
-            ->withConsecutive([Translate::class, null], [EscapeHtml::class, null])
-            ->willReturnOnConsecutiveCalls($translatePlugin, $escapeHtml);
+            ->willReturnMap(
+                [
+                    [Translate::class, null, $translatePlugin],
+                    [EscapeHtml::class, null, $escapeHtml],
+                ],
+            );
 
         $container = $this->getMockBuilder(ContainerInterface::class)
             ->disableOriginalConstructor()
