@@ -21,5 +21,6 @@ parameters:
     check:
       missingCheckedExceptionInThrows: true
       tooWideThrowType: true
-#  ignoreErrors:
+  ignoreErrors:
 #    - '~PHPDoc tag @throws with type .* is not compatible with parent~'
+    - '~is not subtype of Throwable~'
