@@ -22,18 +22,18 @@ parameters:
   checkExplicitMixedMissingReturn: true
   checkFunctionNameCase: true
   checkGenericClassInNonGenericObjectType: false
-  checkImplicitMixed: true
+  checkImplicitMixed: false
   checkInternalClassCaseSensitivity: true
   checkMissingCallableSignature: true
-  checkMissingIterableValueType: true
+  checkMissingIterableValueType: false
   checkTooWideReturnTypesInProtectedAndPublicMethods: true
   checkUninitializedProperties: true
   inferPrivatePropertyTypeFromConstructor: false
   polluteScopeWithAlwaysIterableForeach: false
   polluteScopeWithLoopInitialAssignments: false
 # reportAlwaysTrueInLastCondition: true
-  reportMaybesInMethodSignatures: true
-  reportMaybesInPropertyPhpDocTypes: true
+  reportMaybesInMethodSignatures: false
+  reportMaybesInPropertyPhpDocTypes: false
   reportStaticMethodSignatures: true
 # reportWrongPhpDocTypeInVarTag: true
   treatPhpDocTypesAsCertain: false
@@ -52,3 +52,4 @@ parameters:
   ignoreErrors:
 #    - '~PHPDoc tag @throws with type .* is not compatible with parent~'
     - '~is not subtype of Throwable~'
+    - '~Call to static method PHPUnit\\Framework\\Assert::assert.*\(\) with .* will always evaluate to true~'

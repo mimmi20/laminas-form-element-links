@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,7 +16,6 @@ use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Navigation\Page\AbstractPage;
-use Laminas\Validator\ValidatorInterface;
 use Traversable;
 
 use function array_key_exists;
@@ -40,7 +39,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param array<int, AbstractPage|array|string>|Traversable $options
+     * @param array<int, AbstractPage|array<array<string, string|null>>|string>|Traversable $options
      *
      * @throws InvalidArgumentException
      */
@@ -76,7 +75,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     }
 
     /**
-     * @param array<int, AbstractPage|array|string>|iterable $links
+     * @param array<int, AbstractPage|array<array<string, string|null>>|string>|iterable $links
      *
      * @throws InvalidArgumentException
      */
@@ -130,11 +129,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
         return $this->separator;
     }
 
-    /**
-     * @return $this
-     *
-     * @throws void
-     */
+    /** @throws void */
     public function setSeparator(string $separator): self
     {
         $this->separator = $separator;
@@ -145,15 +140,15 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     /**
      * Provide default input rules for this element
      *
-     * @return array<string, array<int, array<string, class-string>|ValidatorInterface>|false|int|string>
-     * @phpstan-return array('name' => string|null, 'required' => false)
+     * @return array<string, false|string>
+     * @phpstan-return array{name: string, required: false}
      *
      * @throws void
      */
     public function getInputSpecification(): array
     {
         return [
-            'name' => $this->getName(),
+            'name' => $this->getName() ?? '',
             'required' => false,
         ];
     }

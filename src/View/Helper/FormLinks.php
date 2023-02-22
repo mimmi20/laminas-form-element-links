@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021-2022, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -57,7 +57,6 @@ final class FormLinks extends AbstractHelper
     protected $translatableAttributes = ['title' => true];
     private Translate | null $translate;
     private EscapeHtml $escapeHtml;
-
     private string $indent = '';
 
     /** @throws void */
