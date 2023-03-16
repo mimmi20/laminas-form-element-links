@@ -123,7 +123,7 @@ final class FormLinksFactoryTest extends TestCase
 
         $this->expectException(AssertionError::class);
         $this->expectExceptionCode(1);
-        $this->expectExceptionMessage('$plugin should be an Instance of Laminas\View\HelperPluginManager, but was boolean');
+        $this->expectExceptionMessage('$plugin should be an Instance of Laminas\View\HelperPluginManager, but was bool');
 
         ($this->factory)($container);
     }

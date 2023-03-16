@@ -55,17 +55,13 @@ final class FormLinks extends AbstractHelper
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
      */
     protected $translatableAttributes = ['title' => true];
-    private Translate | null $translate;
-    private EscapeHtml $escapeHtml;
-    private string $indent = '';
+    private string $indent            = '';
 
     /** @throws void */
     public function __construct(
-        EscapeHtml $escaper,
-        Translate | null $translator = null,
+        private readonly EscapeHtml $escapeHtml,
+        private readonly Translate | null $translate = null,
     ) {
-        $this->escapeHtml = $escaper;
-        $this->translate  = $translator;
     }
 
     /**
@@ -113,7 +109,7 @@ final class FormLinks extends AbstractHelper
             $attributes = $element->getAttributes();
 
             if (array_key_exists('class', $attributes)) {
-                $classes = explode(' ', $attributes['class']);
+                $classes = explode(' ', (string) $attributes['class']);
                 unset($attributes['class']);
             }
 
