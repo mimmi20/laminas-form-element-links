@@ -21,7 +21,6 @@ use Mimmi20\Form\Links\View\Helper\FormLinks;
 use Mimmi20\Form\Links\View\Helper\FormLinksFactory;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 use function assert;
 
@@ -35,10 +34,7 @@ final class FormLinksFactoryTest extends TestCase
         $this->factory = new FormLinksFactory();
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testInvocationWithTranslator(): void
     {
         $translatePlugin = $this->createMock(Translate::class);
@@ -74,10 +70,7 @@ final class FormLinksFactoryTest extends TestCase
         self::assertInstanceOf(FormLinks::class, $helper);
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testInvocationWithoutTranslator(): void
     {
         $escapeHtml = $this->createMock(EscapeHtml::class);
@@ -123,7 +116,7 @@ final class FormLinksFactoryTest extends TestCase
 
         $this->expectException(AssertionError::class);
         $this->expectExceptionCode(1);
-        $this->expectExceptionMessage('$plugin should be an Instance of Laminas\View\HelperPluginManager, but was boolean');
+        $this->expectExceptionMessage('$plugin should be an Instance of Laminas\View\HelperPluginManager, but was bool');
 
         ($this->factory)($container);
     }
