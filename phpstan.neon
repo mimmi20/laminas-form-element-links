@@ -50,6 +50,4 @@ parameters:
       tooWideThrowType: true
 
   ignoreErrors:
-#    - '~PHPDoc tag @throws with type .* is not compatible with parent~'
-    - '~is not subtype of Throwable~'
     - '~Call to static method PHPUnit\\Framework\\Assert::assert.*\(\) with .* will always evaluate to true~'

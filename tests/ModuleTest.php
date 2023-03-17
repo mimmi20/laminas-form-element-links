@@ -15,14 +15,10 @@ namespace Mimmi20Test\Form\Links;
 use Mimmi20\Form\Links\Module;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 final class ModuleTest extends TestCase
 {
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testGetConfig(): void
     {
         $module = new Module();
@@ -35,10 +31,7 @@ final class ModuleTest extends TestCase
         self::assertArrayHasKey('view_helpers', $config);
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testGetModuleDependencies(): void
     {
         $module = new Module();

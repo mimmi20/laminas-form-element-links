@@ -76,7 +76,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderEmptyLinkList(): void
     {
@@ -112,7 +111,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderSingleLink(): void
     {
@@ -167,7 +165,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLink(): void
     {
@@ -236,7 +233,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithIndent(): void
     {
@@ -308,7 +304,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithIndent2(): void
     {
@@ -380,7 +375,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithIndent3(): void
     {
@@ -452,7 +446,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithIndent4(): void
     {
@@ -523,7 +516,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithoutLabel(): void
     {
@@ -587,7 +579,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithTranslator(): void
     {
@@ -673,7 +664,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testRenderDoubleLinkWithTranslatorButWithoutLabel(): void
     {
@@ -749,7 +739,6 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testInvokeDoubleLink1(): void
     {
@@ -819,10 +808,7 @@ final class FormLinksTest extends TestCase
         self::assertSame($expected, $helperObject->render($element));
     }
 
-    /**
-     * @throws Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testInvokeDoubleLink2(): void
     {
         $class         = 'test-class';
@@ -887,10 +873,7 @@ final class FormLinksTest extends TestCase
         self::assertSame($expected, $helper($element));
     }
 
-    /**
-     * @throws Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testInvokeDoubleLink3(): void
     {
         $class         = 'test-class';
@@ -957,8 +940,76 @@ final class FormLinksTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
+    public function testInvokeDoubleLink4(): void
+    {
+        $ariaLabel     = 'test';
+        $attributes    = ['class' => null, 'aria-label' => $ariaLabel];
+        $label1        = 'test-label1';
+        $label1Escaped = 'test-label1-escaped';
+        $linkClass1    = 'abc';
+        $label2        = 'test-label2';
+        $label2Escaped = 'test-label2-escaped';
+        $linkClass2    = 'xyz';
+        $seperator     = '||';
+
+        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s">%s</a>', $ariaLabel, $linkClass1, $label1Escaped) . PHP_EOL
+            . $seperator . PHP_EOL
+            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s">%s</a>', $ariaLabel, $linkClass2, $label2Escaped);
+
+        $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $escapeHtml->expects(self::exactly(2))
+            ->method('__invoke')
+            ->willReturnMap(
+                [
+                    [$label1, EscapeHtml::RECURSE_NONE, $label1Escaped],
+                    [$label2, EscapeHtml::RECURSE_NONE, $label2Escaped],
+                ],
+            );
+
+        $helper = new FormLinks($escapeHtml, null);
+
+        $element = $this->getMockBuilder(LinksElement::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $element->expects(self::exactly(2))
+            ->method('getAttributes')
+            ->willReturn($attributes);
+        $element->expects(self::never())
+            ->method('getValue');
+        $element->expects(self::never())
+            ->method('getOption');
+        $element->expects(self::once())
+            ->method('getLinks')
+            ->willReturn(
+                [
+                    [
+                        'label' => $label1,
+                        'class' => $linkClass1,
+                        'href' => '#1',
+                    ],
+                    [
+                        'label' => $label2,
+                        'class' => $linkClass2,
+                        'href' => '#2',
+                    ],
+                ],
+            );
+        $element->expects(self::once())
+            ->method('getSeparator')
+            ->willReturn($seperator);
+
+        $helperObject = $helper();
+
+        assert($helperObject instanceof FormLinks);
+
+        self::assertSame($expected, $helperObject->render($element));
+    }
+
+    /** @throws Exception */
     public function testSetGetIndent1(): void
     {
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
@@ -973,10 +1024,7 @@ final class FormLinksTest extends TestCase
         self::assertSame('    ', $helper->getIndent());
     }
 
-    /**
-     * @throws Exception
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testSetGetIndent2(): void
     {
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
