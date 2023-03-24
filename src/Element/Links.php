@@ -25,7 +25,10 @@ use function is_string;
 
 final class Links extends Element implements InputProviderInterface, LinksInterface
 {
-    /** @var array<int, array<string, string|null>> */
+    /**
+     * @var array<int, array<string, string|null>>
+     * @phpstan-var array<int, array{href: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}>
+     */
     private array $links = [];
 
     /**
@@ -39,7 +42,8 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param array<int, AbstractPage|array<array<string, string|null>>|string>|Traversable $options
+     * @param iterable<int, AbstractPage|array<array<string, string|null>>|string> $options
+     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage>|string, separator?: string, label?: string|null} $options
      *
      * @throws InvalidArgumentException
      */
@@ -75,7 +79,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     }
 
     /**
-     * @param array<int, AbstractPage|array<array<string, string|null>>|string>|iterable $links
+     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage> $links
      *
      * @throws InvalidArgumentException
      */
