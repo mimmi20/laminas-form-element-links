@@ -15,7 +15,6 @@ namespace Mimmi20\Form\Links\Element;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
-use Traversable;
 
 interface LinksInterface extends ElementInterface
 {
@@ -25,7 +24,8 @@ interface LinksInterface extends ElementInterface
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param array<int, AbstractPage|array|string>|Traversable $options
+     * @param iterable<int, AbstractPage|array<array<string, string|null>>|string> $options
+     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage>|string, separator?: string, label?: string|null} $options
      *
      * @return self
      *
@@ -33,7 +33,7 @@ interface LinksInterface extends ElementInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
-    public function setOptions($options);
+    public function setOptions(iterable $options);
 
     /**
      * @return array<int, array<string, string|null>>
@@ -43,7 +43,7 @@ interface LinksInterface extends ElementInterface
     public function getLinks(): array;
 
     /**
-     * @param array<int, AbstractPage|array|string>|iterable $links
+     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage> $links
      *
      * @return self
      *
