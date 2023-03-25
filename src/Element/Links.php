@@ -16,7 +16,6 @@ use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Navigation\Page\AbstractPage;
-use Traversable;
 
 use function array_key_exists;
 use function is_array;
@@ -47,7 +46,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @throws InvalidArgumentException
      */
-    public function setOptions($options): self
+    public function setOptions(iterable $options): self
     {
         parent::setOptions($options);
 
