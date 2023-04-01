@@ -32,7 +32,7 @@
     "ext-xml": "*",
     "ext-xmlwriter": "*",
     "infection/infection": "^0.26.19",
-    "laminas/laminas-i18n": "^2.22.0",
+    "laminas/laminas-i18n": "^2.22.1",
     "laminas/laminas-modulemanager": "^2.14.0",
     "laminas/laminas-navigation": "^2.18.1",
     "mimmi20/coding-standard": "^4.0.4",
