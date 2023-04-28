@@ -31,7 +31,7 @@
     "ext-tokenizer": "*",
     "ext-xml": "*",
     "ext-xmlwriter": "*",
-    "infection/infection": "^0.26.20",
+    "infection/infection": "^0.26.21",
     "laminas/laminas-i18n": "^2.22.1",
     "laminas/laminas-modulemanager": "^2.14.0",
     "laminas/laminas-navigation": "^2.18.1",
