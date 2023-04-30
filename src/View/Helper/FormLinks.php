@@ -69,11 +69,9 @@ final class FormLinks extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @return FormLinks|string
-     *
      * @throws Exception\InvalidArgumentException
      */
-    public function __invoke(ElementInterface | null $element = null)
+    public function __invoke(ElementInterface | null $element = null): self | string
     {
         if (!$element) {
             return $this;
@@ -130,9 +128,9 @@ final class FormLinks extends AbstractHelper
                 ),
             );
 
-            if ('' !== $label) {
+            if ($label !== '') {
                 // Translate the label
-                if (null !== $this->translate) {
+                if ($this->translate !== null) {
                     $label = ($this->translate)($label, $this->getTranslatorTextDomain());
                 }
 
@@ -150,7 +148,10 @@ final class FormLinks extends AbstractHelper
 
         $indent = $this->getIndent();
 
-        return $indent . implode(PHP_EOL . $indent . $element->getSeparator() . PHP_EOL . $indent, $renderedLinks);
+        return $indent . implode(
+            PHP_EOL . $indent . $element->getSeparator() . PHP_EOL . $indent,
+            $renderedLinks,
+        );
     }
 
     /**
