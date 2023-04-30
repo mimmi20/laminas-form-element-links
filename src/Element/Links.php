@@ -107,12 +107,12 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
 
             if ($link instanceof AbstractPage) {
                 $this->links[] = [
-                    'id' => $link->getId(),
-                    'title' => $link->getTitle(),
                     'class' => $link->getClass(),
                     'href' => $link->getHref(),
-                    'target' => $link->getTarget(),
+                    'id' => $link->getId(),
                     'label' => $link->getLabel(),
+                    'target' => $link->getTarget(),
+                    'title' => $link->getTitle(),
                 ];
 
                 continue;
@@ -159,13 +159,11 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     /**
      * Set the element value, As this Element has no value to send with the form, no value is set
      *
-     * @param mixed $value
-     *
      * @throws void
      *
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
-    public function setValue($value): self
+    public function setValue(mixed $value): self
     {
         return $this;
     }

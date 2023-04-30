@@ -27,12 +27,12 @@ final class TestFormStringUrl extends Form
 
         $this->add(
             [
-                'type' => Links::class,
                 'name' => 'links',
                 'options' => [
-                    'separator' => ' || ',
                     'links' => 'http://www.test.com',
+                    'separator' => ' || ',
                 ],
+                'type' => Links::class,
             ],
         );
     }

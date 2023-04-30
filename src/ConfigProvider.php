@@ -65,9 +65,9 @@ final class ConfigProvider
         return [
             'aliases' => [
                 'formlinks' => FormLinks::class,
-                'form_links' => FormLinks::class,
                 'formLinks' => FormLinks::class,
                 'FormLinks' => FormLinks::class,
+                'form_links' => FormLinks::class,
             ],
             'factories' => [FormLinks::class => FormLinksFactory::class],
         ];

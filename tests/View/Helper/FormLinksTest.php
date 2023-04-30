@@ -122,7 +122,13 @@ final class FormLinksTest extends TestCase
         $linkClass    = 'abc';
         $seperator    = '';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass, $labelEscaped);
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass,
+            $labelEscaped,
+        );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -149,9 +155,9 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label,
                         'class' => $linkClass,
                         'href' => '#',
+                        'label' => $label,
                     ],
                 ],
             );
@@ -179,9 +185,21 @@ final class FormLinksTest extends TestCase
         $linkClass2    = 'xyz';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -212,14 +230,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -248,9 +266,21 @@ final class FormLinksTest extends TestCase
         $seperator     = '||';
         $indent        = '    ';
 
-        $expected = $indent . sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = $indent . sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $indent . $seperator . PHP_EOL
-            . $indent . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . $indent . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -281,14 +311,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -319,9 +349,21 @@ final class FormLinksTest extends TestCase
         $seperator     = '||';
         $indent        = '    ';
 
-        $expected = $indent . sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = $indent . sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $indent . $seperator . PHP_EOL
-            . $indent . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . $indent . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -352,14 +394,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1 . " \t",
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2 . " \t",
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -390,9 +432,21 @@ final class FormLinksTest extends TestCase
         $seperator     = '||';
         $indent        = '    ';
 
-        $expected = $indent . sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = $indent . sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $indent . $seperator . PHP_EOL
-            . $indent . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . $indent . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -423,14 +477,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1 . ' ' . $class,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -460,9 +514,20 @@ final class FormLinksTest extends TestCase
         $seperator     = '||';
         $indent        = '    ';
 
-        $expected = $indent . sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = $indent . sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $indent . $seperator . PHP_EOL
-            . $indent . sprintf('<a aria-label="%s" href="&#x23;2" class="%s">%s</a>', $ariaLabel, $class, $label2Escaped);
+            . $indent . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -493,14 +558,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1 . ' ' . $class,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => null,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -529,9 +594,21 @@ final class FormLinksTest extends TestCase
         $linkClass2    = 'xyz';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -558,14 +635,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -596,9 +673,21 @@ final class FormLinksTest extends TestCase
         $seperator              = '||';
         $textDomain             = 'test-domain';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1TranlatedEscaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1TranlatedEscaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2TranlatedEscaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2TranlatedEscaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -641,14 +730,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -679,9 +768,21 @@ final class FormLinksTest extends TestCase
         $seperator              = '||';
         $textDomain             = 'test-domain';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2TranlatedEscaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2TranlatedEscaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -716,14 +817,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -753,9 +854,21 @@ final class FormLinksTest extends TestCase
         $linkClass2    = 'xyz';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -786,14 +899,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -822,9 +935,21 @@ final class FormLinksTest extends TestCase
         $linkClass2    = 'xyz';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -855,14 +980,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -887,9 +1012,23 @@ final class FormLinksTest extends TestCase
         $label2Escaped = 'test-label2-escaped';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $linkClass2, $label1Escaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s&#x20;%s&#x20;%s">%s</a>',
+            $ariaLabel,
+            $class,
+            $linkClass1,
+            $linkClass2,
+            $label1Escaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s&#x20;%s">%s</a>', $ariaLabel, $class, $linkClass1, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s&#x20;%s&#x20;%s">%s</a>',
+                $ariaLabel,
+                $class,
+                $linkClass1,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -920,14 +1059,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );
@@ -954,9 +1093,19 @@ final class FormLinksTest extends TestCase
         $linkClass2    = 'xyz';
         $seperator     = '||';
 
-        $expected = sprintf('<a aria-label="%s" href="&#x23;1" class="%s">%s</a>', $ariaLabel, $linkClass1, $label1Escaped) . PHP_EOL
+        $expected = sprintf(
+            '<a aria-label="%s" href="&#x23;1" class="%s">%s</a>',
+            $ariaLabel,
+            $linkClass1,
+            $label1Escaped,
+        ) . PHP_EOL
             . $seperator . PHP_EOL
-            . sprintf('<a aria-label="%s" href="&#x23;2" class="%s">%s</a>', $ariaLabel, $linkClass2, $label2Escaped);
+            . sprintf(
+                '<a aria-label="%s" href="&#x23;2" class="%s">%s</a>',
+                $ariaLabel,
+                $linkClass2,
+                $label2Escaped,
+            );
 
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
             ->disableOriginalConstructor()
@@ -987,14 +1136,14 @@ final class FormLinksTest extends TestCase
             ->willReturn(
                 [
                     [
-                        'label' => $label1,
                         'class' => $linkClass1,
                         'href' => '#1',
+                        'label' => $label1,
                     ],
                     [
-                        'label' => $label2,
                         'class' => $linkClass2,
                         'href' => '#2',
+                        'label' => $label2,
                     ],
                 ],
             );

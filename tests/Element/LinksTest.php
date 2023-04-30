@@ -186,9 +186,9 @@ final class LinksTest extends TestCase
             ->willReturn($label);
 
         $expectedLinks = [
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href1, 'target' => $target, 'label' => $label],
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href2, 'target' => $target, 'label' => $label],
-            ['id' => $id, 'title' => $title, 'class' => $class, 'href' => $href3, 'target' => $target, 'label' => $label],
+            ['class' => $class, 'href' => $href1, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
+            ['class' => $class, 'href' => $href2, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
+            ['class' => $class, 'href' => $href3, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
         ];
         $links         = new Links();
 
@@ -203,7 +203,9 @@ final class LinksTest extends TestCase
         $links = new Links();
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('elements to used as links must be string, array, AbstractPage or PageInterface');
+        $this->expectExceptionMessage(
+            'elements to used as links must be string, array, AbstractPage or PageInterface',
+        );
         $this->expectExceptionCode(0);
         $links->setLinks([1]);
     }
