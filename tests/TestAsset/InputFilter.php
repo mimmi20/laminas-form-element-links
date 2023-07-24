@@ -14,6 +14,10 @@ namespace Mimmi20Test\Form\Links\TestAsset;
 
 use Laminas\InputFilter\InputFilter as InputFilterBase;
 
+/**
+ * @template TFilteredValues of object
+ * @extends InputFilterBase<TFilteredValues>
+ */
 final class InputFilter extends InputFilterBase
 {
 }
