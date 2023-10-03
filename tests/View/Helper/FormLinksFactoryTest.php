@@ -14,6 +14,7 @@ namespace Mimmi20Test\Form\Links\View\Helper;
 
 use AssertionError;
 use Interop\Container\ContainerInterface;
+use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\I18n\View\Helper\Translate;
 use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\HelperPluginManager;
@@ -21,6 +22,7 @@ use Mimmi20\Form\Links\View\Helper\FormLinks;
 use Mimmi20\Form\Links\View\Helper\FormLinksFactory;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 
 use function assert;
 
@@ -34,7 +36,11 @@ final class FormLinksFactoryTest extends TestCase
         $this->factory = new FormLinksFactory();
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocationWithTranslator(): void
     {
         $translatePlugin = $this->createMock(Translate::class);
@@ -70,7 +76,11 @@ final class FormLinksFactoryTest extends TestCase
         self::assertInstanceOf(FormLinks::class, $helper);
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocationWithoutTranslator(): void
     {
         $escapeHtml = $this->createMock(EscapeHtml::class);
@@ -101,7 +111,11 @@ final class FormLinksFactoryTest extends TestCase
         self::assertInstanceOf(FormLinks::class, $helper);
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocationWithAssertionError(): void
     {
         $container = $this->getMockBuilder(ContainerInterface::class)
@@ -123,7 +137,11 @@ final class FormLinksFactoryTest extends TestCase
         ($this->factory)($container);
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocationWithoutTranslator2(): void
     {
         $helperPluginManager = $this->getMockBuilder(HelperPluginManager::class)
@@ -153,7 +171,11 @@ final class FormLinksFactoryTest extends TestCase
         ($this->factory)($container);
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocationWithTranslator2(): void
     {
         $helperPluginManager = $this->getMockBuilder(HelperPluginManager::class)
