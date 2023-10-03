@@ -15,7 +15,9 @@ namespace Mimmi20\Form\Links\View\Helper;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\View\Helper\AbstractHelper;
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\View\Helper\Translate;
+use Laminas\View\Exception\InvalidArgumentException;
 use Laminas\View\Helper\EscapeHtml;
 use Mimmi20\Form\Links\Element\LinksInterface as LinksElement;
 
@@ -62,6 +64,7 @@ final class FormLinks extends AbstractHelper
         private readonly EscapeHtml $escapeHtml,
         private readonly Translate | null $translate = null,
     ) {
+        // do nothing here
     }
 
     /**
@@ -70,6 +73,8 @@ final class FormLinks extends AbstractHelper
      * Proxies to {@link render()}.
      *
      * @throws Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function __invoke(ElementInterface | null $element = null): self | string
     {
@@ -81,9 +86,11 @@ final class FormLinks extends AbstractHelper
     }
 
     /**
-     * Render a form <select> element from the provided $element
+     * Render a form element from the provided $element
      *
      * @throws Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function render(ElementInterface $element): string
     {
@@ -176,8 +183,6 @@ final class FormLinks extends AbstractHelper
     {
         return $this->indent;
     }
-
-    // Util methods:
 
     /**
      * Retrieve whitespace representation of $indent

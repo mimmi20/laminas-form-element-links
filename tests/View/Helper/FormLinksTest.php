@@ -14,6 +14,7 @@ namespace Mimmi20Test\Form\Links\View\Helper;
 
 use Laminas\Form\Element\Text;
 use Laminas\Form\Exception\InvalidArgumentException;
+use Laminas\I18n\Exception\RuntimeException;
 use Laminas\I18n\View\Helper\Translate;
 use Laminas\View\Helper\EscapeHtml;
 use Mimmi20\Form\Links\Element\LinksInterface as LinksElement;
@@ -31,6 +32,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderWithWrongElement(): void
     {
@@ -76,6 +79,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderEmptyLinkList(): void
     {
@@ -111,6 +116,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderSingleLink(): void
     {
@@ -171,6 +178,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLink(): void
     {
@@ -251,6 +260,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithIndent(): void
     {
@@ -334,6 +345,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithIndent2(): void
     {
@@ -417,6 +430,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithIndent3(): void
     {
@@ -500,6 +515,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithIndent4(): void
     {
@@ -581,6 +598,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithoutLabel(): void
     {
@@ -656,6 +675,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithTranslator(): void
     {
@@ -753,6 +774,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testRenderDoubleLinkWithTranslatorButWithoutLabel(): void
     {
@@ -840,6 +863,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testInvokeDoubleLink1(): void
     {
@@ -921,7 +946,12 @@ final class FormLinksTest extends TestCase
         self::assertSame($expected, $helperObject->render($element));
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
+     */
     public function testInvokeDoubleLink2(): void
     {
         $class         = 'test-class';
@@ -998,7 +1028,12 @@ final class FormLinksTest extends TestCase
         self::assertSame($expected, $helper($element));
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
+     */
     public function testInvokeDoubleLink3(): void
     {
         $class         = 'test-class';
@@ -1080,6 +1115,8 @@ final class FormLinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws \Laminas\View\Exception\InvalidArgumentException
+     * @throws RuntimeException
      */
     public function testInvokeDoubleLink4(): void
     {
