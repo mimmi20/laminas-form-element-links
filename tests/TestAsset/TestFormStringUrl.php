@@ -14,8 +14,13 @@ namespace Mimmi20Test\Form\Links\TestAsset;
 
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Form\Form;
+use Laminas\InputFilter\InputFilterInterface;
 use Mimmi20\Form\Links\Element\Links;
 
+/**
+ * @template TFilteredValues of object
+ * @extends Form<TFilteredValues>
+ */
 final class TestFormStringUrl extends Form
 {
     /** @throws InvalidArgumentException */
@@ -23,7 +28,10 @@ final class TestFormStringUrl extends Form
     {
         parent::__construct('collection');
 
-        $this->setInputFilter(new InputFilter());
+        /** @var InputFilterInterface<TFilteredValues> $inputfilter */
+        $inputfilter = new InputFilter();
+
+        $this->setInputFilter($inputfilter);
 
         $this->add(
             [
