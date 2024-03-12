@@ -39,7 +39,7 @@ final class ModuleTest extends TestCase
         $config = $module->getModuleDependencies();
 
         self::assertIsArray($config);
-        self::assertCount(6, $config);
+        self::assertCount(4, $config);
         self::assertArrayHasKey(0, $config);
         self::assertContains('Laminas\I18n', $config);
         self::assertContains('Laminas\InputFilter', $config);
