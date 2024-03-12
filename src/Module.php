@@ -46,8 +46,6 @@ final class Module implements ConfigProviderInterface, DependencyIndicatorInterf
     {
         return [
             'Laminas\I18n',
-            'Laminas\Hydrator',
-            'Laminas\Validator',
             'Laminas\InputFilter',
             'Laminas\Form',
             'Laminas\Navigation',

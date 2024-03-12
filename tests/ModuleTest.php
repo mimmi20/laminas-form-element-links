@@ -42,8 +42,6 @@ final class ModuleTest extends TestCase
         self::assertCount(6, $config);
         self::assertArrayHasKey(0, $config);
         self::assertContains('Laminas\I18n', $config);
-        self::assertContains('Laminas\Hydrator', $config);
-        self::assertContains('Laminas\Validator', $config);
         self::assertContains('Laminas\InputFilter', $config);
         self::assertContains('Laminas\Form', $config);
         self::assertContains('Laminas\Navigation', $config);
