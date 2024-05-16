@@ -91,6 +91,8 @@ final class FormLinks extends AbstractHelper
      * @throws Exception\InvalidArgumentException
      * @throws InvalidArgumentException
      * @throws RuntimeException
+     *
+     * @api
      */
     public function render(ElementInterface $element): string
     {
@@ -166,6 +168,8 @@ final class FormLinks extends AbstractHelper
      * number of spaces to indent with
      *
      * @throws void
+     *
+     * @api
      */
     public function setIndent(int | string $indent): self
     {
@@ -178,6 +182,8 @@ final class FormLinks extends AbstractHelper
      * Returns indentation
      *
      * @throws void
+     *
+     * @api
      */
     public function getIndent(): string
     {
