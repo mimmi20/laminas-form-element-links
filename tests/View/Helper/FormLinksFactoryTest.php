@@ -21,6 +21,7 @@ use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\HelperPluginManager;
 use Mimmi20\Form\Links\View\Helper\FormLinks;
 use Mimmi20\Form\Links\View\Helper\FormLinksFactory;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -32,6 +33,7 @@ final class FormLinksFactoryTest extends TestCase
     private FormLinksFactory $factory;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->factory = new FormLinksFactory();

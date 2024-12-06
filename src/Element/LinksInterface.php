@@ -16,6 +16,7 @@ namespace Mimmi20\Form\Links\Element;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
+use Override;
 
 interface LinksInterface extends ElementInterface
 {
@@ -34,6 +35,7 @@ interface LinksInterface extends ElementInterface
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
      */
+    #[Override]
     public function setOptions(iterable $options);
 
     /**
