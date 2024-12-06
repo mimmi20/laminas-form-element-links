@@ -17,6 +17,7 @@ use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Navigation\Page\AbstractPage;
+use Override;
 
 use function array_key_exists;
 use function is_array;
@@ -47,6 +48,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @throws InvalidArgumentException
      */
+    #[Override]
     public function setOptions(iterable $options): self
     {
         parent::setOptions($options);
@@ -73,6 +75,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @throws void
      */
+    #[Override]
     public function getLinks(): array
     {
         return $this->links;
@@ -83,6 +86,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @throws InvalidArgumentException
      */
+    #[Override]
     public function setLinks(iterable $links): self
     {
         $this->links = [];
@@ -128,12 +132,14 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     }
 
     /** @throws void */
+    #[Override]
     public function getSeparator(): string
     {
         return $this->separator;
     }
 
     /** @throws void */
+    #[Override]
     public function setSeparator(string $separator): self
     {
         $this->separator = $separator;
@@ -149,6 +155,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @throws void
      */
+    #[Override]
     public function getInputSpecification(): array
     {
         return [
@@ -164,6 +171,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      *
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
+    #[Override]
     public function setValue(mixed $value): self
     {
         return $this;

@@ -17,6 +17,7 @@ use Mimmi20\Form\Links\ConfigProvider;
 use Mimmi20\Form\Links\Element\Links;
 use Mimmi20\Form\Links\Element\LinksInterface;
 use Mimmi20\Form\Links\View\Helper\FormLinks;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -25,6 +26,7 @@ final class ConfigProviderTest extends TestCase
     private ConfigProvider $provider;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->provider = new ConfigProvider();
