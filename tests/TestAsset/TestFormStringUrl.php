@@ -3,7 +3,7 @@
 /**
  * This file is part of the mimmi20/laminas-form-element-links package.
  *
- * Copyright (c) 2021-2024, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2025, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,7 +15,6 @@ namespace Mimmi20Test\Form\Links\TestAsset;
 
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Form\Form;
-use Laminas\InputFilter\InputFilterInterface;
 use Mimmi20\Form\Links\Element\Links;
 
 /**
@@ -29,7 +28,7 @@ final class TestFormStringUrl extends Form
     {
         parent::__construct('collection');
 
-        /** @var InputFilterInterface<TFilteredValues> $inputfilter */
+        /** @var InputFilter<TFilteredValues> $inputfilter */
         $inputfilter = new InputFilter();
 
         $this->setInputFilter($inputfilter);
