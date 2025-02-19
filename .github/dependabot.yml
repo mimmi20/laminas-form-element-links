@@ -34,6 +34,7 @@ updates:
       prefix: "composer"
 
     ignore:
+      - dependency-name: "laminas/laminas-servicemanager"
       - dependency-name: "psr/container"
 
     rebase-strategy: "auto"
