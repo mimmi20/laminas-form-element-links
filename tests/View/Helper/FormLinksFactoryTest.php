@@ -21,7 +21,7 @@ use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\HelperPluginManager;
 use Mimmi20\Form\Links\View\Helper\FormLinks;
 use Mimmi20\Form\Links\View\Helper\FormLinksFactory;
-use Override;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -30,19 +30,12 @@ use function assert;
 
 final class FormLinksFactoryTest extends TestCase
 {
-    private FormLinksFactory $factory;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->factory = new FormLinksFactory();
-    }
-
     /**
      * @throws Exception
      * @throws InvalidArgumentException
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocationWithTranslator(): void
     {
@@ -74,7 +67,7 @@ final class FormLinksFactoryTest extends TestCase
             ->willReturn($helperPluginManager);
 
         assert($container instanceof ContainerInterface);
-        $helper = ($this->factory)($container);
+        $helper = (new FormLinksFactory())($container);
 
         self::assertInstanceOf(FormLinks::class, $helper);
     }
@@ -83,6 +76,8 @@ final class FormLinksFactoryTest extends TestCase
      * @throws Exception
      * @throws InvalidArgumentException
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocationWithoutTranslator(): void
     {
@@ -109,7 +104,7 @@ final class FormLinksFactoryTest extends TestCase
             ->willReturn($helperPluginManager);
 
         assert($container instanceof ContainerInterface);
-        $helper = ($this->factory)($container);
+        $helper = (new FormLinksFactory())($container);
 
         self::assertInstanceOf(FormLinks::class, $helper);
     }
@@ -137,7 +132,7 @@ final class FormLinksFactoryTest extends TestCase
             '$plugin should be an Instance of Laminas\View\HelperPluginManager, but was bool',
         );
 
-        ($this->factory)($container);
+        (new FormLinksFactory())($container);
     }
 
     /**
@@ -171,7 +166,7 @@ final class FormLinksFactoryTest extends TestCase
         $this->expectExceptionCode(1);
         $this->expectExceptionMessage('assert($escapeHtml instanceof EscapeHtml)');
 
-        ($this->factory)($container);
+        (new FormLinksFactory())($container);
     }
 
     /**
@@ -205,6 +200,6 @@ final class FormLinksFactoryTest extends TestCase
         $this->expectExceptionCode(1);
         $this->expectExceptionMessage('assert($translator instanceof Translate)');
 
-        ($this->factory)($container);
+        (new FormLinksFactory())($container);
     }
 }
