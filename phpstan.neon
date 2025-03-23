@@ -89,7 +89,7 @@ parameters:
     function: 9
 
   type_coverage:
-    return_type: 94.9
+    return_type: 94.7
     param_type: 100
     property_type: 100
     constant_type: 100

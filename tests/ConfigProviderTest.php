@@ -17,25 +17,15 @@ use Mimmi20\Form\Links\ConfigProvider;
 use Mimmi20\Form\Links\Element\Links;
 use Mimmi20\Form\Links\Element\LinksInterface;
 use Mimmi20\Form\Links\View\Helper\FormLinks;
-use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigProviderTest extends TestCase
 {
-    private ConfigProvider $provider;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->provider = new ConfigProvider();
-    }
-
     /** @throws Exception */
     public function testProviderDefinesExpectedFactoryServices(): void
     {
-        $formElementConfig = $this->provider->getFormElementConfig();
+        $formElementConfig = (new ConfigProvider())->getFormElementConfig();
         self::assertIsArray($formElementConfig);
 
         self::assertArrayHasKey('factories', $formElementConfig);
@@ -53,7 +43,7 @@ final class ConfigProviderTest extends TestCase
     /** @throws Exception */
     public function testProviderDefinesExpectedFactoryServices2(): void
     {
-        $viewHelperConfig = $this->provider->getViewHelperConfig();
+        $viewHelperConfig = (new ConfigProvider())->getViewHelperConfig();
         self::assertIsArray($viewHelperConfig);
 
         self::assertArrayHasKey('factories', $viewHelperConfig);
@@ -73,7 +63,7 @@ final class ConfigProviderTest extends TestCase
     /** @throws Exception */
     public function testInvocationReturnsArrayWithDependencies(): void
     {
-        $config = ($this->provider)();
+        $config = (new ConfigProvider())();
 
         self::assertIsArray($config);
         self::assertArrayHasKey('form_elements', $config);
