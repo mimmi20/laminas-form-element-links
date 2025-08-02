@@ -1,6 +1,6 @@
 {
   "name": "mimmi20/laminas-form-element-links",
-  "description": "Provides an additional Form Element",
+  "description": "Provides an additional Form Element for laminas-form to render links inside a form",
   "license": "MIT",
   "type": "library",
   "authors": [
