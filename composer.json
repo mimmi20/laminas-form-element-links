@@ -19,7 +19,7 @@
     "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
     "laminas/laminas-form": "^3.21.0",
     "laminas/laminas-inputfilter": "^2.33.0",
-    "laminas/laminas-view": "^2.40.0"
+    "laminas/laminas-view": "^2.41.0"
   },
   "require-dev": {
     "ext-ctype": "*",
