@@ -99,11 +99,7 @@ final class FormLinks extends AbstractHelper
     {
         if (!$element instanceof LinksElement) {
             throw new Exception\InvalidArgumentException(
-                sprintf(
-                    '%s requires that the element is of type %s',
-                    __METHOD__,
-                    LinksElement::class,
-                ),
+                sprintf('%s requires that the element is of type %s', __METHOD__, LinksElement::class),
             );
         }
 
