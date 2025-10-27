@@ -14,6 +14,7 @@ declare(strict_types = 1);
 namespace Mimmi20Test\Form\Links\Element;
 
 use Laminas\Form\Exception\DomainException;
+use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\Navigation\Page\AbstractPage;
 use Mimmi20\Form\Links\Element\Links;
@@ -214,6 +215,7 @@ final class LinksTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws ExceptionInterface
      */
     public function testCanRetrieveDefaultSeparator(): void
     {
@@ -240,6 +242,7 @@ final class LinksTest extends TestCase
      * @throws Exception
      * @throws InvalidArgumentException
      * @throws DomainException
+     * @throws ExceptionInterface
      */
     public function testValidationIsEveryTimeTrue(): void
     {
