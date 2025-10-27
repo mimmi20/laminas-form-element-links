@@ -16,7 +16,6 @@ namespace Mimmi20Test\Form\Links\Element;
 use Laminas\Form\Exception\DomainException;
 use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
-use Laminas\Navigation\Page\AbstractPage;
 use Mimmi20\Form\Links\Element\Links;
 use Mimmi20Test\Form\Links\TestAsset\TestFormStringUrl;
 use PHPUnit\Framework\Exception;
@@ -106,108 +105,13 @@ final class LinksTest extends TestCase
         self::assertSame($expectedLinks, $links->getLinks());
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
-    public function testSetAbstractPage(): void
-    {
-        $href1  = 'http://www.test.com';
-        $href2  = 'http://www.test.org';
-        $href3  = 'http://www.test.org/test';
-        $id     = 'abc';
-        $title  = 'test-title';
-        $class  = 'test-class';
-        $target = null;
-        $label  = 'test-label';
-
-        $page1 = $this->getMockBuilder(AbstractPage::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page1->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page1->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page1->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page1->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href1);
-        $page1->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page1->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $page2 = $this->getMockBuilder(AbstractPage::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page2->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page2->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page2->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page2->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href2);
-        $page2->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page2->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $page3 = $this->getMockBuilder(AbstractPage::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $page3->expects(self::once())
-            ->method('getId')
-            ->willReturn($id);
-        $page3->expects(self::once())
-            ->method('getTitle')
-            ->willReturn($title);
-        $page3->expects(self::once())
-            ->method('getClass')
-            ->willReturn($class);
-        $page3->expects(self::once())
-            ->method('getHref')
-            ->willReturn($href3);
-        $page3->expects(self::once())
-            ->method('getTarget')
-            ->willReturn($target);
-        $page3->expects(self::once())
-            ->method('getLabel')
-            ->willReturn($label);
-
-        $expectedLinks = [
-            ['class' => $class, 'href' => $href1, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
-            ['class' => $class, 'href' => $href2, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
-            ['class' => $class, 'href' => $href3, 'id' => $id, 'label' => $label, 'target' => $target, 'title' => $title],
-        ];
-        $links         = new Links();
-
-        $links->setLinks([$page1, $page2, $page3]);
-
-        self::assertSame($expectedLinks, $links->getLinks());
-    }
-
     /** @throws InvalidArgumentException */
     public function testSetWrongDatatype(): void
     {
         $links = new Links();
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(
-            'elements to used as links must be string, array, AbstractPage or PageInterface',
-        );
+        $this->expectExceptionMessage('elements to used as links must be string or array');
         $this->expectExceptionCode(0);
         $links->setLinks([1]);
     }

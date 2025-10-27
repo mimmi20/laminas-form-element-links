@@ -31,7 +31,6 @@
     "ext-xmlwriter": "*",
     "infection/infection": "^0.31.7",
     "laminas/laminas-i18n": "^2.31.0",
-    "laminas/laminas-navigation": "^2.21.0",
     "laminas/laminas-servicemanager": "^3.24.0",
     "mimmi20/coding-standard": "^6.2.5",
     "nikic/php-parser": "^5.6.1",
