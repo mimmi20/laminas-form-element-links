@@ -16,7 +16,6 @@ namespace Mimmi20\Form\Links\Element;
 use Laminas\Form\Element;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\InputFilter\InputProviderInterface;
-use Laminas\Navigation\Page\AbstractPage;
 use Override;
 
 use function array_key_exists;
@@ -43,8 +42,8 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param iterable<int, AbstractPage|array<array<string, string|null>>|string> $options
-     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage>|string, separator?: string, label?: string|null} $options
+     * @param iterable<int, array<array<string, string|null>>|string> $options
+     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}>|string, separator?: string, label?: string|null} $options
      *
      * @throws InvalidArgumentException
      */
@@ -82,7 +81,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
     }
 
     /**
-     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage> $links
+     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}> $links
      *
      * @throws InvalidArgumentException
      */
@@ -110,22 +109,7 @@ final class Links extends Element implements InputProviderInterface, LinksInterf
                 continue;
             }
 
-            if ($link instanceof AbstractPage) {
-                $this->links[] = [
-                    'class' => $link->getClass(),
-                    'href' => $link->getHref(),
-                    'id' => $link->getId(),
-                    'label' => $link->getLabel(),
-                    'target' => $link->getTarget(),
-                    'title' => $link->getTitle(),
-                ];
-
-                continue;
-            }
-
-            throw new InvalidArgumentException(
-                'elements to used as links must be string, array, AbstractPage or PageInterface',
-            );
+            throw new InvalidArgumentException('elements to used as links must be string or array');
         }
 
         return $this;

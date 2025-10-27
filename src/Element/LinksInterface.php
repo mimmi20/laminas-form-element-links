@@ -15,7 +15,6 @@ namespace Mimmi20\Form\Links\Element;
 
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
-use Laminas\Navigation\Page\AbstractPage;
 use Override;
 
 interface LinksInterface extends ElementInterface
@@ -26,8 +25,8 @@ interface LinksInterface extends ElementInterface
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param iterable<int, AbstractPage|array<array<string, string|null>>|string> $options
-     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage>|string, separator?: string, label?: string|null} $options
+     * @param iterable<int, array<array<string, string|null>>|string> $options
+     * @phpstan-param array{links?: iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}>|string, separator?: string, label?: string|null} $options
      *
      * @return self
      *
@@ -46,7 +45,7 @@ interface LinksInterface extends ElementInterface
     public function getLinks(): array;
 
     /**
-     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}|AbstractPage> $links
+     * @phpstan-param iterable<int, int|string|array{href?: string, id?: string|null, title?: string|null, class?: string|null, target?: string|null}> $links
      *
      * @return self
      *
