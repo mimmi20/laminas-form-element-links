@@ -17,8 +17,8 @@
   },
   "require": {
     "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
-    "laminas/laminas-form": "^3.21.0",
-    "laminas/laminas-inputfilter": "^2.33.0",
+    "laminas/laminas-form": "^3.22.0",
+    "laminas/laminas-inputfilter": "^2.34.0",
     "laminas/laminas-view": "^2.43.0"
   },
   "require-dev": {
@@ -31,7 +31,6 @@
     "ext-xmlwriter": "*",
     "infection/infection": "^0.31.7",
     "laminas/laminas-i18n": "^2.30.0",
-    "laminas/laminas-modulemanager": "^2.17.0",
     "laminas/laminas-navigation": "^2.20.0",
     "laminas/laminas-servicemanager": "^3.23.0",
     "mimmi20/coding-standard": "^6.2.5",
